@@ -250,27 +250,25 @@ namespace MarDeCortezDsk.Controllers
         }
 
 
-        public void Post(Folios fichaEntrada)
+        public void Post(Folios FolioEntrada)
         {
-            string FichaEntrada = Convert.ToString(NewId());
-            string id_usuario = fichaEntrada.id_usuario;
-            string id_proveedor = fichaEntrada.id_proveedor;
-            string fecha_entrada = fichaEntrada.fecha_entrada;
-            string query = "insert into folios(IdFolio, IdUsuario, IdProveedores,Fecha,Estado) values" + "(@FichaEntrada, @id_usuario, @id_proveedor,@fecha_entrada,@Estado)";
-
+            string Folio = Convert.ToString(NewId());
+            string id_usuario = FolioEntrada.id_usuario;
+            string id_proveedor = FolioEntrada.id_proveedor;
+            string fecha_entrada = FolioEntrada.fecha_entrada;
+            string queryPost = $"insert into folios values ('{Folio}','{id_usuario}','{id_proveedor}','{fecha_entrada}','Pendiente')";
+            string queryBitacora = $"set @Contador = (SELECT COUNT(*) FROM Bitacora);INSERT INTO Bitacora VALUES (CONCAT('B-', LPAD( (@Contador+1), 3, '0')), 'Entrada', now(),'{id_usuario}')";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@FichaEntrada", FichaEntrada);
-                command.Parameters.AddWithValue("@id_usuario", id_usuario);
-                command.Parameters.AddWithValue("@id_proveedor", id_proveedor);
-                command.Parameters.AddWithValue("@fecha_entrada", fecha_entrada);
-                command.Parameters.AddWithValue("@Estado", "Pendiente");
+                MySqlCommand command = new MySqlCommand(queryPost, connection);
+                MySqlCommand command2 = new MySqlCommand(queryBitacora, connection);
+
 
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+                    command2.ExecuteNonQuery();
                     connection.Close();
 
                 }

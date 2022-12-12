@@ -8,7 +8,7 @@ namespace MarDeCortezDsk.Controllers
 {
     public class Controller
     {
-        public string connectionString = "Server=bqmdgve1fhwl2vjd5wwf-mysql.services.clever-cloud.com;Database=bqmdgve1fhwl2vjd5wwf; Uid=uzpxn5pgrttsxccr;Pwd=JUfLv4iaA9cESXBnmRPH;";
+        public string connectionString = "Server=bqmdgve1fhwl2vjd5wwf-mysql.services.clever-cloud.com;Database=bqmdgve1fhwl2vjd5wwf; Uid=uzpxn5pgrttsxccr;Pwd=JUfLv4iaA9cESXBnmRPH;Allow User Variables=True;";
         public string stringToDb(string word)
         {
             int lenght = 50 - word.Length;
