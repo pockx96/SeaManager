@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D13135B-042A-4A56-A549-C0A9053B88EE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MarDeCortezDsk</RootNamespace>
+    <AssemblyName>SeaManager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>L:\SeaManager\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F9005F8EED026031E09A3D034B3AA213FACAEBB9</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MarDeCortezDsk_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIco.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.11.3.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.2.11.3\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.4.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.Sharp.5.15.4\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itextsharp.xmlworker.5.5.13.3\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.30.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Downloads\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>packages\MySqlConnector.2.1.13\lib\net471\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="SpreadsheetLight, Version=3.5.0.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>packages\SpreadsheetLight.3.5.0\lib\netstandard2.0\SpreadsheetLight.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.5.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\CatalogoPresentacionController.cs" />
+    <Compile Include="Controllers\CatalogoProductoController.cs" />
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\Encrypt.cs" />
+    <Compile Include="Controllers\FoliosController.cs" />
+    <Compile Include="Controllers\CamaronController.cs" />
+    <Compile Include="Controllers\PescadoController.cs" />
+    <Compile Include="Controllers\ProveedoresControllers.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Models\Inventario.cs" />
+    <Compile Include="Models\IProducto.cs" />
+    <Compile Include="Styles\Animations.cs" />
+    <Compile Include="UserControlls\BarraUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\BarraUsuario.designer.cs">
+      <DependentUpon>BarraUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\botonesEdicion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\botonesEdicion.Designer.cs">
+      <DependentUpon>botonesEdicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\Calendario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Calendario.Designer.cs">
+      <DependentUpon>Calendario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\CarritoProducto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\CarritoProducto.Designer.cs">
+      <DependentUpon>CarritoProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ConfiguracionProveedores.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ConfiguracionProveedores.Designer.cs">
+      <DependentUpon>ConfiguracionProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\CofiguariosUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\CofiguariosUsuarios.Designer.cs">
+      <DependentUpon>CofiguariosUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\InventarioRestasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\InventarioRestasForm.Designer.cs">
+      <DependentUpon>InventarioRestasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProducto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProducto.Designer.cs">
+      <DependentUpon>NuevoProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ProductosConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ProductosConfig.Designer.cs">
+      <DependentUpon>ProductosConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ListaUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ListaUsuarios.Designer.cs">
+      <DependentUpon>ListaUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProveedor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProveedor.Designer.cs">
+      <DependentUpon>NuevoProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProveedorMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoProveedorMenu.Designer.cs">
+      <DependentUpon>NuevoProveedorMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\NuevoUsuario.Designer.cs">
+      <DependentUpon>NuevoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ListaFolios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\ListaFolios.Designer.cs">
+      <DependentUpon>ListaFolios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\MenuProveedor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\MenuProveedor.Designer.cs">
+      <DependentUpon>MenuProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\UserConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\UserConfig.Designer.cs">
+      <DependentUpon>UserConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\Ifichas.cs" />
+    <Compile Include="UserControlls\InventarioRestas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\InventarioRestas.Designer.cs">
+      <DependentUpon>InventarioRestas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\InventarioShowDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\InventarioShowDialog.Designer.cs">
+      <DependentUpon>InventarioShowDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\labelCrear.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\labelCrear.Designer.cs">
+      <DependentUpon>labelCrear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\PanelRedondeado.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\Ajustes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\Ajustes.Designer.cs">
+      <DependentUpon>Ajustes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\CalculadoraFichas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\CalculadoraFichas.Designer.cs">
+      <DependentUpon>CalculadoraFichas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\Inventarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\Inventarios.Designer.cs">
+      <DependentUpon>Inventarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\ProveedorShowDialog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\ProveedorShowDialog.Designer.cs">
+      <DependentUpon>ProveedorShowDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\PruebaDelegados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControlls\PruebaDelegados.Designer.cs">
+      <DependentUpon>PruebaDelegados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\Relog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Relog.designer.cs">
+      <DependentUpon>Relog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormMessageBox.Designer.cs">
+      <DependentUpon>FormMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ipruebas.cs" />
+    <Compile Include="Views\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Colors.cs" />
+    <Compile Include="Views\MenuUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MenuUser.Designer.cs">
+      <DependentUpon>MenuUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MenuAdmin.Designer.cs">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Camaron.cs" />
+    <Compile Include="Models\Catalogo_Medidas.cs" />
+    <Compile Include="Models\Catalogo_Presentaciones.cs" />
+    <Compile Include="Models\Catalogo_Productos.cs" />
+    <Compile Include="Models\Folios.cs" />
+    <Compile Include="Models\Pescado.cs" />
+    <Compile Include="Models\Proveedor.cs" />
+    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlls\BotonRedondo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\FichaCamaron.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\FichaCamaron.Designer.cs">
+      <DependentUpon>FichaCamaron.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\CircularImagen.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\OtrosFicha.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\OtrosFicha.Designer.cs">
+      <DependentUpon>OtrosFicha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\PescadoFicha.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\Fichas\PescadoFicha.Designer.cs">
+      <DependentUpon>PescadoFicha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\RJButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControlls\RJTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\RJTextBox.designer.cs">
+      <DependentUpon>RJTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\DataGridPersonalizado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\DataGridPersonalizado.designer.cs">
+      <DependentUpon>DataGridPersonalizado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProvedorShowDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProvedorShowDialog.Designer.cs">
+      <DependentUpon>ProvedorShowDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\prueba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Pruebas de metodos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Pruebas de metodos.Designer.cs">
+      <DependentUpon>Pruebas de metodos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RJMessageBox.cs" />
+    <EmbeddedResource Include="UserControlls\BarraUsuario.resx">
+      <DependentUpon>BarraUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\botonesEdicion.resx">
+      <DependentUpon>botonesEdicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\Calendario.resx">
+      <DependentUpon>Calendario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\CarritoProducto.resx">
+      <DependentUpon>CarritoProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\Ajustes.resx">
+      <DependentUpon>Ajustes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\CalculadoraFichas.resx">
+      <DependentUpon>CalculadoraFichas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\ConfiguracionProveedores.resx">
+      <DependentUpon>ConfiguracionProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\CofiguariosUsuarios.resx">
+      <DependentUpon>CofiguariosUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\InventarioRestasForm.resx">
+      <DependentUpon>InventarioRestasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\NuevoProducto.resx">
+      <DependentUpon>NuevoProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\ProductosConfig.resx">
+      <DependentUpon>ProductosConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\ListaUsuarios.resx">
+      <DependentUpon>ListaUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\Inventarios.resx">
+      <DependentUpon>Inventarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\NuevoProveedor.resx">
+      <DependentUpon>NuevoProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\NuevoProveedorMenu.resx">
+      <DependentUpon>NuevoProveedorMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\NuevoUsuario.resx">
+      <DependentUpon>NuevoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\MenuProveedor.resx">
+      <DependentUpon>MenuProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\UserConfig.resx">
+      <DependentUpon>UserConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\ListaFolios.resx">
+      <DependentUpon>ListaFolios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\InventarioRestas.resx">
+      <DependentUpon>InventarioRestas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\InventarioShowDialog.resx">
+      <DependentUpon>InventarioShowDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\labelCrear.resx">
+      <DependentUpon>labelCrear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\ProveedorShowDialog.resx">
+      <DependentUpon>ProveedorShowDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\PruebaDelegados.resx">
+      <DependentUpon>PruebaDelegados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\Relog.resx">
+      <DependentUpon>Relog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormMessageBox.resx">
+      <DependentUpon>FormMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MenuUser.resx">
+      <DependentUpon>MenuUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MenuAdmin.resx">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UserControlls\Fichas\FichaCamaron.resx">
+      <DependentUpon>FichaCamaron.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\CircularImagen.resx">
+      <DependentUpon>CircularImagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\Fichas\OtrosFicha.resx">
+      <DependentUpon>OtrosFicha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\Fichas\PescadoFicha.resx">
+      <DependentUpon>PescadoFicha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\RJTextBox.resx">
+      <DependentUpon>RJTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\DataGridPersonalizado.resx">
+      <DependentUpon>DataGridPersonalizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProvedorShowDialog.resx">
+      <DependentUpon>ProvedorShowDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Pruebas de metodos.resx">
+      <DependentUpon>Pruebas de metodos.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="MarDeCortezDsk_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="UserControlls\datagridview.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\aquarium-octopus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\fish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\shrimp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\real-estate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Pictures\LOGO.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\info-free-icon-font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\busqueda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\mussel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\octopus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\tienda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\usuarios.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\ajustes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\documento.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\lista.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\shrimp-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\fish-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\mussel-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assest\Icons\fish-black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shrimp Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fish_Color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seashell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seashell %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOGO.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOGO-modified.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation.png" />
+    <None Include="Resources\ejemplo.jpg" />
+    <Content Include="AppIco.ico" />
+    <Content Include="Resources\Icono.png" />
+    <None Include="Resources\MicrosoftTeams-image.png" />
+    <Content Include="Resources\Plantilla.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
