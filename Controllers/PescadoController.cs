@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MarDeCortezDsk.Models;
 using System.Data.SqlClient;
 using MySqlConnector;
+using DocumentFormat.OpenXml.Drawing;
 
 namespace MarDeCortezDsk.Controllers
 {
@@ -240,27 +241,70 @@ namespace MarDeCortezDsk.Controllers
         }
 
         
-        public void Post(Pescado pescado)
+        public void Post(Pescado pescado,string proveedor)
         {
-            string idProducto = NewId();
-            string folioEntrada = pescado.FolioEntrada;
-            string tipo_producto = pescado.Tipo_producto;
-            float? kilos = pescado.Kilos;
-            string almacenaje = pescado.Almacenaje;
-            string presentacion = pescado.Presentacion;
-            int cantidad = pescado.Cantidad;
-            string query = "insert into pescado(IdProducto,IdFolio, TipoProducto, Kilos, Almacenaje, Presentacion, Cantidad) values" + "(@idProducto, @folioEntrada, @tipo_producto, @kilos, @almacenaje, @presentacion, @cantidad)";
+
+            string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM pescado);INSERT INTO pescado VALUES (CONCAT('P-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{pescado.Tipo_producto}','{pescado.Almacenaje}','{pescado.Presentacion}','{pescado.Kilos}','{pescado.Cantidad}')";
+            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), @proveedor ,'{pescado.Tipo_producto}' ,'{pescado.Presentacion}',@sumaCantidad,@sumaKilos)";
+
+            string queryInventarioUpdate = $"set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{pescado.Presentacion}' and Producto = '{pescado.Tipo_producto}' and Proveedor = @proveedor";
+
+
+            InventariosController inventariosController = new InventariosController();
+            List<Inventario> list = inventariosController.Get(proveedor);
+            string queryInvetario = "";
+            foreach (Inventario element in list)
+            {
+                if (element.Proveedor == proveedor && element.Presentacion == pescado.Presentacion)
+                {
+                    queryInvetario = queryInventarioUpdate;
+                }
+                else
+                {
+                    queryInvetario = queryInventarioInsert;
+                }
+
+            }
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@idProducto", idProducto);
-                command.Parameters.AddWithValue("@FolioEntrada", folioEntrada);
-                command.Parameters.AddWithValue("@tipo_producto", tipo_producto);
-                command.Parameters.AddWithValue("@kilos", kilos);
-                command.Parameters.AddWithValue("@almacenaje", almacenaje);
-                command.Parameters.AddWithValue("@presentacion", presentacion);
-                command.Parameters.AddWithValue("@cantidad", cantidad);
+                MySqlCommand command2 = new MySqlCommand(queryInvetario, connection);
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("error de la base de datos : " + ex);
+
+                }
+            }
+        }
+
+
+        public void Post(Pescado pescado, string proveedor, Inventario inventario)
+        {
+            string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM pescado);INSERT INTO pescado VALUES (CONCAT('P-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{pescado.Tipo_producto}','{pescado.Almacenaje}','{pescado.Presentacion}','{pescado.Kilos}','{pescado.Cantidad}')";
+
+            InventariosController inventariosController = new InventariosController();
+            List<Inventario> list = inventariosController.Get(proveedor);
+            foreach (Inventario element in list)
+            {
+                if (element.Proveedor == proveedor && element.Presentacion == pescado.Presentacion)
+                {
+                    inventariosController.Update(inventario, pescado.Cantidad, pescado.Kilos);
+                }
+
+            }
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 try
                 {
@@ -276,6 +320,7 @@ namespace MarDeCortezDsk.Controllers
                 }
             }
         }
+
 
         public void Update(Pescado pescado, bool SumaResta)
         {

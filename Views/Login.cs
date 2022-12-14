@@ -89,7 +89,7 @@ namespace MarDeCortezDsk
                 txtBox_psswrd.ForeColor = Color.LightGray;
             }
         }
-        public void BtnAgregar_Click(object sender, EventArgs e)
+        public void IniciarSesion()
         {
             UsuarioController UserServise = new UsuarioController();
             Usuarios UsuarioValidator = UserServise.Get(txtBox_user.Texts);
@@ -115,83 +115,27 @@ namespace MarDeCortezDsk
                 DialogResult result = RJMessageBox.Show("Contraseña incorrecta.",
                 "Aviso!");
             }
-            else if (txtBox_user.Texts == UsuarioValidator.id_usuario && txtBox_psswrd.Texts == UsuarioValidator.password )
+            else if (txtBox_user.Texts == UsuarioValidator.id_usuario && txtBox_psswrd.Texts == UsuarioValidator.password)
             {
-               if (UsuarioValidator.tipo_usuario == "Usuario\t")
-               {
+                if (UsuarioValidator.tipo_usuario == "Usuario\t")
+                {
                     DialogResult result = RJMessageBox.Show("Bienvenido " + UsuarioValidator.nombre_usuario + " !.", "Aviso!");
                     MenuUser menu = new MenuUser(UsuarioValidator.id_usuario);
                     menu.Show();
                     this.Hide();
-               }
-               else if (UsuarioValidator.tipo_usuario == "Administrador")
-               {
+                }
+                else if (UsuarioValidator.tipo_usuario == "Administrador")
+                {
                     DialogResult result = RJMessageBox.Show("Bienvenido " + UsuarioValidator.nombre_usuario + " !.", "Aviso!");
                     MenuAdmin menu = new MenuAdmin(UsuarioValidator.id_usuario);
                     menu.Show();
                     this.Hide();
                 }
             }
-
-            /*try
-            {
-                string Username = txtBox_user.Texts;
-                string Userpass = txtBox_psswrd.Texts;
-                string ValidatorPass = "";
-                string ValidatorRol = "";
-
-                if (Username != "" && Userpass != "")
-                {
-                    Usuarios usuario = UserServise.Get(Username);
-
-
-                    if (usuario.id_usuario == Username)
-                    {
-                        ValidatorPass = usuario.password;
-                        ValidatorRol = usuario.tipo_usuario;
-                        if (ValidatorPass == Userpass && ValidatorRol == "Usuario\t")
-                        {
-                            DialogResult result = RJMessageBox.Show("Bienvenido " + usuario.nombre_usuario + " !.", "Aviso!");
-                            MenuUser menu = new MenuUser(usuario.id_usuario);
-                            menu.Show();
-                            this.Hide();
-
-                        }
-                        else if (ValidatorPass == Userpass && ValidatorRol == "Administrador")
-                        {
-                            DialogResult result = RJMessageBox.Show("Bienvenido " + usuario.nombre_usuario + " !.", "Aviso!");
-                            MenuAdmin menu = new MenuAdmin(usuario.id_usuario);
-                            menu.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            DialogResult result = RJMessageBox.Show("Contraseña incorrecta.", "Aviso!");
-                            txtBox_psswrd.BorderColor = Color.Red;
-                        }
-                    }
-                    else
-                    {
-                        DialogResult result = RJMessageBox.Show("Usuario no encontrado.", "Aviso!");
-                        txtBox_user.BorderColor = Color.Red;
-                    }
-
-
-                }
-                else
-                {
-                    DialogResult result = RJMessageBox.Show("Por favor asegurese de rellenar todos los campos.", "Aviso!");
-                    txtBox_psswrd.BorderColor = Color.Red;
-                    txtBox_user.BorderColor = Color.Red;
-
-                }
-            }
-            catch
-            {
-
-
-            }*/
-
+        }
+        public void BtnAgregar_Click(object sender, EventArgs e)
+        {
+            IniciarSesion();
         }
     
 
@@ -213,6 +157,14 @@ namespace MarDeCortezDsk
         private void sPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtBox_psswrd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)(Keys.Enter))
+            {
+                IniciarSesion();
+            }
         }
     }
 }

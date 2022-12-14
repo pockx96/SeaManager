@@ -140,12 +140,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BitacoraController.cs" />
+    <Compile Include="Controllers\CamaronController.cs" />
     <Compile Include="Controllers\CatalogoPresentacionController.cs" />
     <Compile Include="Controllers\CatalogoProductoController.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\Encrypt.cs" />
     <Compile Include="Controllers\FoliosController.cs" />
-    <Compile Include="Controllers\CamaronController.cs" />
+    <Compile Include="Controllers\InventariosController.cs" />
     <Compile Include="Controllers\PescadoController.cs" />
     <Compile Include="Controllers\ProveedoresControllers.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -194,6 +195,12 @@
     </Compile>
     <Compile Include="UserControlls\FichasAdmin\InventarioRestasForm.Designer.cs">
       <DependentUpon>InventarioRestasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\BitacoraView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlls\FichasAdmin\BitacoraView.Designer.cs">
+      <DependentUpon>BitacoraView.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlls\FichasAdmin\NuevoProducto.cs">
       <SubType>UserControl</SubType>
@@ -430,6 +437,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlls\FichasAdmin\InventarioRestasForm.resx">
       <DependentUpon>InventarioRestasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlls\FichasAdmin\BitacoraView.resx">
+      <DependentUpon>BitacoraView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlls\FichasAdmin\NuevoProducto.resx">
       <DependentUpon>NuevoProducto.cs</DependentUpon>

@@ -60,7 +60,6 @@ namespace MarDeCortezDsk.UserControlls
         {
             Camaron camaron = new Camaron();
             CamaronController controller = new CamaronController();
-            camaron.IdProducto = controller.NewId();
             camaron.FolioEntrada = Folio;
             camaron.Tipo_producto = "Camaron";
             camaron.Presentacion = TxtBoxPresentacion.Text;
@@ -275,7 +274,7 @@ namespace MarDeCortezDsk.UserControlls
         }
 
 
-        public float? KilosCalculation(int cantidad, string presentacion)
+        public float KilosCalculation(int cantidad, string presentacion)
         {
             float kilos;
             switch (presentacion)
@@ -294,7 +293,7 @@ namespace MarDeCortezDsk.UserControlls
                     return kilos;
 
             }
-            return null;
+            return 0;
         }
 
 

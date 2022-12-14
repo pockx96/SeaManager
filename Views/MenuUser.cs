@@ -102,7 +102,7 @@ namespace MarDeCortezDsk.Views
         {
             ActivateButton(sender, RGBColors.color2);
 
-            Inventarios inventarios = new Inventarios();
+            Inventarios inventarios = new Inventarios(false);
             inventarios.Location = new Point(140, 6);
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(inventarios);

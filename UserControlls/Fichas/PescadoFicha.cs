@@ -129,7 +129,7 @@ namespace MarDeCortezDsk.UserControlls
             TxtboxCantidad.Value = 0;
         }
 
-        public float? KilosCalculation(int cantidad, string presentacion)
+        public float KilosCalculation(int cantidad, string presentacion)
         {
             float kilos;
             switch (presentacion)
@@ -195,7 +195,7 @@ namespace MarDeCortezDsk.UserControlls
 
 
             }
-            return null;
+            return 0;
         }
 
             /// <summary>

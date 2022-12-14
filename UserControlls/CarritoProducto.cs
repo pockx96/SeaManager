@@ -12,15 +12,14 @@ using MarDeCortezDsk.Controllers;
 using MarDeCortezDsk.UserControlls;
 using MarDeCortezDsk.Views;
 using CustomMessageBox;
+using iTextSharp.text;
+
 namespace MarDeCortezDsk.UserControlls
 {
     public partial class CarritoProducto : UserControl
     {
-        public CarritoProducto()
-        {
-            InitializeComponent();
-        }
-        public CarritoProducto(string proveedor,string usuario,string fecha)
+
+        public CarritoProducto(string proveedor, string usuario, string fecha )
         {
             InitializeComponent();
             FoliosController foliosController = new FoliosController();
@@ -28,7 +27,15 @@ namespace MarDeCortezDsk.UserControlls
             this.Usuario = usuario;
             this.Fecha = fecha;
             LblFolio.Text = foliosController.NewId();
-            
+            this.Post += new PostDelegate(RestasInventarios);
+
+
+        }
+        public CarritoProducto()
+        {
+            InitializeComponent();
+            this.Post += new PostDelegate(SumasInventarios);
+
 
         }
 
@@ -36,6 +43,8 @@ namespace MarDeCortezDsk.UserControlls
         public string Fecha { get; set; }
         public string Usuario { get; set; }
         public Folios Folio { get; set; }
+        public Inventario Inventario{get; set;}
+
         private string formularioActual { get; set; }
 
         public PescadoFicha PescadoFicha = new PescadoFicha();
@@ -61,23 +70,14 @@ namespace MarDeCortezDsk.UserControlls
             FoliosController foliosController = new FoliosController();
             Folios NewFolio = new Folios()
             {
-                IdFolio = foliosController.NewId(),
                 id_usuario = Usuario,
                 fecha_entrada = Fecha,
                 id_proveedor = Proveedor,
                 Estado = "Pendiente"
             };
             this.Folio = NewFolio;
-            LblFolio.Text = Folio.IdFolio;
 
-            if (Proveedor == "Tienda")
-            {
-                this.Post += new PostDelegate(UpdateInventario);
-            }
-            else
-            {
-                this.Post += new PostDelegate(PostProveedores);
-            }
+
         }
 
         public void CamaronAdd()
@@ -121,7 +121,7 @@ namespace MarDeCortezDsk.UserControlls
         }
 
 
-        private void PostProveedores()
+        private void SumasInventarios()
         {
             PescadoController pescadoController = new PescadoController();
             CamaronController camaronController = new CamaronController();
@@ -133,16 +133,16 @@ namespace MarDeCortezDsk.UserControlls
                 var result = RJMessageBox.Show("¿Desea confirmar esta entrada?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
+                    foliosController.Post(Folio);
                     foreach (Camaron camaron in ListCamaron)
                     {
-                        camaronController.Post(camaron);
+                        camaronController.Post(camaron, Folio.id_proveedor);
                     }
 
                     foreach (Pescado pescado in ListPescado)
                     {
-                        pescadoController.Post(pescado);
+                        pescadoController.Post(pescado,Folio.id_proveedor);
                     }
-                    foliosController.Post(Folio);
                     DialogResult resul = RJMessageBox.Show("Productos agregados con exito!.",
                      "Aviso!");
                     Clear();
@@ -155,7 +155,7 @@ namespace MarDeCortezDsk.UserControlls
                "Aviso!");
             }
         }
-        private void UpdateInventario()
+        private void RestasInventarios()
         {
             PescadoController pescadoController = new PescadoController();
             CamaronController camaronController = new CamaronController();
@@ -167,47 +167,33 @@ namespace MarDeCortezDsk.UserControlls
                 var result = RJMessageBox.Show("¿Desea confirmar esta entrada?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
+                    Folio.Estado = "Salida de inventario";
+
+                    InventariosController inventariosController = new InventariosController();
+                    List<Inventario> listInvetarios = inventariosController.Get(Proveedor);
+                    foliosController.Post(Folio);
+                    
                     foreach (Camaron camaron in ListCamaron)
                     {
-                        List<Camaron> ListTienda = camaronController.GetByProveedor("Tienda");
-                        if (ListTienda.Count == 0)
-                        {
-                            camaronController.Post(camaron);
-                        }
-                        foreach (Camaron camaronTienda in ListTienda)
-                        {
-                            if (camaronTienda.Presentacion == camaron.Presentacion && camaronTienda.Tipo_producto == camaron.Tipo_producto)
-                            {
-                                camaronController.Update(camaron,true);
-                            }
-                            else
-                            {
-                                camaronController.Post(camaron);
-                            }
-                        }
+                        string Presentacion = $"{camaron.Presentacion} {camaron.Medida}";
 
+
+                        foreach (Inventario inventario in listInvetarios)
+                        {
+                            if (inventario.Proveedor == Proveedor && inventario.Presentacion == Presentacion)
+                            {
+                                inventariosController.Update(inventario, camaron.Cantidad, camaron.Kilos);
+
+                            }
+                        }
                     }
 
                     foreach (Pescado pescado in ListPescado)
                     {
-                        List<Pescado> ListTienda = pescadoController.GetByProveedor("Tienda");
-                        if (ListTienda.Count == 0)
-                        {
-                            pescadoController.Post(pescado);
-                        }
-                        foreach (Pescado pescadoTienda in ListTienda)
-                        {
-                            if (pescadoTienda.Presentacion == pescado.Presentacion && pescadoTienda.Tipo_producto == pescado.Tipo_producto)
-                            {
-                                pescadoController.Update(pescado,true);
-                            }
-                            else
-                            {
-                                pescadoController.Post(pescado);
-                            }
-                        }
+                        pescadoController.Post(pescado, Folio.id_proveedor);
                     }
-                    foliosController.Post(Folio);
+
+
                     DialogResult resul = RJMessageBox.Show("Productos agregados con exito!.",
                      "Aviso!");
                     Clear();
@@ -297,6 +283,11 @@ namespace MarDeCortezDsk.UserControlls
 
                 }
             }
+        }
+
+        private void botonRedondo1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

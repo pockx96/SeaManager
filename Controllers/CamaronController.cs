@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MarDeCortezDsk.Models;
 using System.Data.SqlClient;
 using MySqlConnector;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 
 namespace MarDeCortezDsk.Controllers
 {
@@ -218,30 +219,70 @@ namespace MarDeCortezDsk.Controllers
 
             }
         }
-        public void Post(Camaron camaron)
-        
+        public void Post(Camaron camaron,string proveedor)
         {
-            string idProducto = NewId();
-            string ficha = camaron.FolioEntrada;
-            string tipo_producto = camaron.Tipo_producto;
-            float? Kilos = camaron.Kilos;
-            string medida = camaron.Medida;
-            string almacenaje = camaron.Almacenaje;
-            string presentacion = camaron.Presentacion;
-            int cantidad = camaron.Cantidad;
-            string query = "insert into camaron(IdProducto, IdFolio, TipoProducto, Kilos, Medida, Almacenaje, Presentacion, Cantidad) values" + "(@idProducto, @FolioEntrada, @tipo_producto, @Kilos, @medida,  @almacenaje, @presentacion, @cantidad)";
+
+            string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM camaron);INSERT INTO camaron VALUES (CONCAT('C-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{camaron.Tipo_producto}','{camaron.Kilos}','{camaron.Medida}','{camaron.Almacenaje}','{camaron.Presentacion}','{camaron.Cantidad}')";
+
+            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), @proveedor ,'{camaron.Tipo_producto}' ,'{camaron.Presentacion} {camaron.Medida}',@sumaCantidad,@sumaKilos)";
+
+            string queryInventarioUpdate = $"set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{camaron.Presentacion} {camaron.Medida}' and Producto = '{camaron.Tipo_producto}' and Proveedor = @proveedor";
+
+
+            InventariosController inventariosController = new InventariosController();
+            List<Inventario> list = inventariosController.Get(proveedor);
+            string Presentacion = $"{camaron.Presentacion} {camaron.Medida}";
+            string queryInvetario = "";
+            foreach (Inventario element in list)
+            {
+                if (element.Proveedor == proveedor && element.Presentacion == Presentacion)
+                {
+
+                    queryInvetario = queryInventarioUpdate;
+
+                }
+                else 
+                {
+                    queryInvetario = queryInventarioInsert;
+                }
+
+            }
+            if (list.Count == 0 )
+            {
+                queryInvetario = queryInventarioInsert;
+            }
+
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@idProducto", idProducto);
-                command.Parameters.AddWithValue("@FolioEntrada", ficha);
-                command.Parameters.AddWithValue("@tipo_producto", tipo_producto);
-                command.Parameters.AddWithValue("@Kilos", Kilos);
-                command.Parameters.AddWithValue("@medida", medida);
-                command.Parameters.AddWithValue("@almacenaje", almacenaje);
-                command.Parameters.AddWithValue("@presentacion", presentacion);
-                command.Parameters.AddWithValue("@cantidad", cantidad);
+                MySqlCommand command2 = new MySqlCommand(queryInvetario, connection);
+
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    command2.ExecuteNonQuery();
+                    connection.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("error de la base de datos : " + ex);
+
+                }
+            }
+        }
+
+        public void RestasPost(Camaron camaron, string proveedor)
+        {
+           string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM camaron);INSERT INTO camaron VALUES (CONCAT('C-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{camaron.Tipo_producto}','{camaron.Kilos}','{camaron.Medida}','{camaron.Almacenaje}','{camaron.Presentacion}','{camaron.Cantidad}')";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
 
                 try
                 {
@@ -258,25 +299,7 @@ namespace MarDeCortezDsk.Controllers
             }
         }
 
-        public string NewId()
-        {
-            CamaronController camaronController = new CamaronController();
-            List<Camaron> fichaList = camaronController.Get();
-            int index = fichaList.Count + 1;
-            string indexString = Convert.ToString(index);
 
-            if (indexString.Length == 1)
-            {
-                return "C0" + indexString;
-            }
-            else if (indexString.Length == 2)
-            {
-                return "C" + indexString;
-            }
-            return indexString;
-
-
-        }
 
         public void Update(Camaron camaron , bool SumaResta)
         {
@@ -337,7 +360,7 @@ namespace MarDeCortezDsk.Controllers
             }
         }
 
-        public float? KilosCalculation(int cantidad, string presentacion)
+        public float KilosCalculation(int cantidad, string presentacion)
         {
             float kilos;
             switch (presentacion)
@@ -356,7 +379,7 @@ namespace MarDeCortezDsk.Controllers
                     return kilos;
 
             }
-            return null;
+            return 0;
         }
     }
 }

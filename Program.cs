@@ -17,7 +17,7 @@ namespace MarDeCortezDsk
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuUser("Pock"));
+            Application.Run(new MenuAdmin("pock"));
             
         }
     }

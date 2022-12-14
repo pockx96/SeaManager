@@ -84,7 +84,7 @@ namespace MarDeCortezDsk
             this.txtBox_psswrd.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
             this.txtBox_psswrd.BorderRadius = 0;
             this.txtBox_psswrd.BorderSize = 2;
-            this.txtBox_psswrd.Font = new System.Drawing.Font("Liberation Sans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_psswrd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_psswrd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtBox_psswrd.Location = new System.Drawing.Point(54, 321);
             this.txtBox_psswrd.Margin = new System.Windows.Forms.Padding(4);
@@ -94,10 +94,11 @@ namespace MarDeCortezDsk
             this.txtBox_psswrd.PasswordChar = true;
             this.txtBox_psswrd.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.txtBox_psswrd.PlaceholderText = "Contraseña";
-            this.txtBox_psswrd.Size = new System.Drawing.Size(210, 36);
+            this.txtBox_psswrd.Size = new System.Drawing.Size(210, 39);
             this.txtBox_psswrd.TabIndex = 41;
             this.txtBox_psswrd.Texts = "";
             this.txtBox_psswrd.UnderlinedStyle = false;
+            this.txtBox_psswrd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_psswrd_KeyPress);
             // 
             // txtBox_user
             // 
@@ -106,7 +107,7 @@ namespace MarDeCortezDsk
             this.txtBox_user.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
             this.txtBox_user.BorderRadius = 0;
             this.txtBox_user.BorderSize = 2;
-            this.txtBox_user.Font = new System.Drawing.Font("Liberation Sans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox_user.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtBox_user.Location = new System.Drawing.Point(54, 248);
             this.txtBox_user.Margin = new System.Windows.Forms.Padding(4);
@@ -116,7 +117,7 @@ namespace MarDeCortezDsk
             this.txtBox_user.PasswordChar = false;
             this.txtBox_user.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.txtBox_user.PlaceholderText = "Usuario";
-            this.txtBox_user.Size = new System.Drawing.Size(210, 36);
+            this.txtBox_user.Size = new System.Drawing.Size(210, 39);
             this.txtBox_user.TabIndex = 40;
             this.txtBox_user.Texts = "";
             this.txtBox_user.UnderlinedStyle = false;
@@ -152,7 +153,7 @@ namespace MarDeCortezDsk
             this.BtnAgregar.BorderSize = 0;
             this.BtnAgregar.FlatAppearance.BorderSize = 0;
             this.BtnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAgregar.Font = new System.Drawing.Font("Liberation Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAgregar.ForeColor = System.Drawing.Color.White;
             this.BtnAgregar.Location = new System.Drawing.Point(54, 394);
             this.BtnAgregar.Name = "BtnAgregar";

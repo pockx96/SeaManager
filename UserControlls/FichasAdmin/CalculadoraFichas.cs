@@ -68,7 +68,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             foreach (Pescado element in ListSort)
             {
                 index = ListaEntrada.RowCount;
-                ListaEntrada.Rows.Insert(index, element.Tipo_producto, element.Presentacion, element.Cantidad, element.Kilos);
+                ListaEntrada.Rows.Insert(index, element.Tipo_producto, element.Presentacion, element.Kilos, element.Cantidad);
             }
 
 
@@ -135,6 +135,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                                                                                     //PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", comboBox1.Text);
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", "ficha de proveedor");
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
+                PaginaHTML_Texto = PaginaHTML_Texto.Replace("@Folio", Folio);
 
                 string filas = string.Empty;
                 decimal total = 0;

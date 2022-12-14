@@ -39,9 +39,9 @@ namespace MarDeCortezDsk.Views
         public string Fecha { get; set; }
         Animations animations = new Animations();
         Point FichasLocation = new Point(100, 87);
+        CarritoProducto carrito;
 
 
-  
 
         /// <summary>
         /// 
@@ -50,7 +50,7 @@ namespace MarDeCortezDsk.Views
         /// </summary>
         /// 
 
-        
+
         Ajustes ajustes = new Ajustes();
         ListaUsuarios editarUsuario = new ListaUsuarios();
 
@@ -70,8 +70,40 @@ namespace MarDeCortezDsk.Views
             listaFolios.Location = new Point(0,0);
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(listaFolios);
+            BtnInventario.Location = new Point(11, 73);
+            BtnInventario.Visible = true;
+            BtnCamaron.Visible = false;
+            BtnPescado.Visible = false;
+            BtnOtros.Visible = false;
+            BtnUser.Enabled = true;
+            BtnProducto.Enabled = true;
+            BtnUser.Visible = true;
+            BtnProducto.Visible = true;
+            BtnBack.Visible = true;
+            BtnFichas.Visible = true;
 
         }
+        public void Botones(string proveedor)
+        {
+            carrito = new CarritoProducto(proveedor,Usuario,Fecha) { Location = new Point(0, 0) };
+            carrito.Restart += new CarritoProducto.RestartDelegate(FichaEntradaAdd);
+            BtnInventario.Location = new Point(11, 3);
+            BtnInventario.Visible = true;
+            BtnCamaron.Location = new Point(11, 73);
+            BtnCamaron.Visible = true;
+            BtnPescado.Location = new Point(11, 149);
+            BtnPescado.Visible = true;
+            BtnOtros.Location = new Point(11, 230);
+            BtnOtros.Visible = true;
+            BtnUser.Enabled = false;
+            BtnProducto.Enabled = false;
+            BtnUser.Visible = false;
+            BtnProducto.Visible = false;
+            ContainerComponents.Controls.Clear();
+            ContainerComponents.Controls.Add(carrito);
+            BtnBack.Visible = true;
+        }
+
         private void BtnFichas_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
@@ -97,9 +129,24 @@ namespace MarDeCortezDsk.Views
         /// <summary>
         /// Boton Regresar
         /// </summary>
+        private void BtnInventario_Click(object sender, EventArgs e)
+        {
+            InvAdd();
+        }
+        public void InvAdd()
+        {
+            ActivateButton(BtnInventario, RGBColors.color2);
 
+            Inventarios inventarios = new Inventarios(true);
+            inventarios.Location = new Point(140, 6);
+            ContainerComponents.Controls.Clear();
+            inventarios.BotonesLaterales += new Inventarios.BotonesLateralesDelegate(Botones);
+            ContainerComponents.Controls.Add(inventarios);
+            BtnBack.Visible = false;
+        }
         private void BtnBack_Click_1(object sender, EventArgs e)
         {
+
             FichaEntradaAdd();
         }
 
@@ -107,17 +154,7 @@ namespace MarDeCortezDsk.Views
         /// Boton de inventario
         /// </summary>
 
-        private void BtnInventario_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color2);
-
-            Inventarios inventarios = new Inventarios();
-            inventarios.Location = new Point(140, 6);
-            ContainerComponents.Controls.Clear();
-            ContainerComponents.Controls.Add(inventarios);
-            BtnBack.Visible = false;
-        }
-
+       
         /// Boton de agregar usuario
 
         
@@ -239,81 +276,64 @@ namespace MarDeCortezDsk.Views
             this.Location = new Point(277,44);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        private void BtnFichas_MouseHover(object sender, EventArgs e)
+        public void BitacoraLoad()
         {
-
-
-        }
-
-        private void PanelForm_MouseHover(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnInventario_MouseHover(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void BtnAjustes_MouseHover(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnUser_MouseHover(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void PanelForm_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void fichasEntrada1_Load(object sender, EventArgs e)
-        {
+            BitacoraView bitacoraView = new BitacoraView() { Location = new Point(0, 0) };
+            ContainerComponents.Controls.Clear();
+            ContainerComponents.Controls.Add(bitacoraView);
 
         }
 
 
-
-        private void MenuContainer_Paint(object sender, PaintEventArgs e)
+        private Button CurrentBtnProduct;
+        private void DisableButtonProducto(Color color)
         {
-
+            if (CurrentBtnProduct != null)
+            {
+                CurrentBtnProduct.ForeColor = color;
+                CurrentBtnProduct.BackColor = Color.FromArgb(82, 122, 242);
+                CurrentBtnProduct.ForeColor = Color.Gainsboro;
+                CurrentBtnProduct.TextAlign = ContentAlignment.MiddleLeft;
+                CurrentBtnProduct.TextImageRelation = TextImageRelation.ImageBeforeText;
+                CurrentBtnProduct.ImageAlign = ContentAlignment.MiddleLeft;
+            }
+        }
+        private void ActivateButtonProducto(object senderBtn, Color color)
+        {
+            if (senderBtn != null)
+            {
+                DisableButtonProducto(color);
+                CurrentBtnProduct = (Button)senderBtn;
+                CurrentBtnProduct.BackColor = Color.FromArgb(1, 76, 76, 76);
+                CurrentBtnProduct.TextAlign = ContentAlignment.MiddleCenter;
+                CurrentBtnProduct.TextImageRelation = TextImageRelation.TextBeforeImage;
+                CurrentBtnProduct.TextAlign = ContentAlignment.MiddleCenter;
+                CurrentBtnProduct.ImageAlign = ContentAlignment.MiddleRight;
+                CurrentBtnProduct.ForeColor = color;
+                //Left border button
+                leftBorderBtn.BackColor = color;
+                leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
+                leftBorderBtn.Visible = true;
+                leftBorderBtn.BringToFront();
+            }
+        }
+        
+        private void BtnCamaron_Click_1(object sender, EventArgs e)
+        {
+            ActivateButtonProducto(sender, RGBColors.color1);
+            carrito.CamaronAdd();
         }
 
-        private void TitleBar_Click(object sender, EventArgs e)
+        private void BtnPescado_Click(object sender, EventArgs e)
         {
-
-        }
-        private void sPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
+            ActivateButtonProducto(sender, RGBColors.color2);
+            carrito.PescadoAdd();
         }
 
-        private void BtnCalcular_Click(object sender, EventArgs e)
+        private void BtnOtros_Click(object sender, EventArgs e)
         {
-
+            ActivateButtonProducto(sender, RGBColors.color3);
+            carrito.OtrosAdd();
         }
-
-        private void ContainerBtn_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-
     }
 }

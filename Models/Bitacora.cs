@@ -12,5 +12,7 @@ namespace MarDeCortezDsk.Models
         public string Proceso { get; set; }
         public string Fecha { get; set; }
         public string Usuario { get; set; }
+        public string Proveedor { get; set; }
+
     }
 }

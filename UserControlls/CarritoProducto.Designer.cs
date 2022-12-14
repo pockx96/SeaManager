@@ -275,6 +275,7 @@
             this.botonRedondo1.Text = "botonRedondo1";
             this.botonRedondo1.TextColor = System.Drawing.Color.White;
             this.botonRedondo1.UseVisualStyleBackColor = false;
+            this.botonRedondo1.Click += new System.EventHandler(this.botonRedondo1_Click);
             // 
             // botonRedondo2
             // 

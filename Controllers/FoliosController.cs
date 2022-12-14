@@ -252,12 +252,9 @@ namespace MarDeCortezDsk.Controllers
 
         public void Post(Folios FolioEntrada)
         {
-            string Folio = Convert.ToString(NewId());
-            string id_usuario = FolioEntrada.id_usuario;
-            string id_proveedor = FolioEntrada.id_proveedor;
-            string fecha_entrada = FolioEntrada.fecha_entrada;
-            string queryPost = $"insert into folios values ('{Folio}','{id_usuario}','{id_proveedor}','{fecha_entrada}','Pendiente')";
-            string queryBitacora = $"set @Contador = (SELECT COUNT(*) FROM Bitacora);INSERT INTO Bitacora VALUES (CONCAT('B-', LPAD( (@Contador+1), 3, '0')), 'Entrada', now(),'{id_usuario}')";
+
+            string queryPost = $"set @Contador = (SELECT COUNT(*) FROM folios); insert into folios values (CONCAT('F-', LPAD( (@Contador+1), 3, '0')),'{FolioEntrada.id_usuario}','{FolioEntrada.id_proveedor}','{FolioEntrada.fecha_entrada}','Pendiente')";
+            string queryBitacora = $"set @Contador = (SELECT COUNT(*) FROM Bitacora);INSERT INTO Bitacora VALUES (CONCAT('B-', LPAD( (@Contador+1), 3, '0')), 'Entrada', now(),'{FolioEntrada.id_usuario}','{FolioEntrada.id_proveedor}')";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(queryPost, connection);
@@ -282,13 +279,16 @@ namespace MarDeCortezDsk.Controllers
         public void Update(Folios folio)
         {
             string query = $"UPDATE folios set Estado='{folio.Estado}' where IdFolio = '{folio.IdFolio}'";
+            string queryBitacora = $"set @Contador = (SELECT COUNT(*) FROM Bitacora);INSERT INTO Bitacora VALUES (CONCAT('B-', LPAD( (@Contador+1), 3, '0')), 'Confirmacion', now(),'{folio.id_usuario}','{folio.id_proveedor}')";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command2 = new MySqlCommand(queryBitacora, connection);
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+                    command2.ExecuteNonQuery();
                     connection.Close();
                 }
                 catch (Exception ex)
@@ -302,15 +302,6 @@ namespace MarDeCortezDsk.Controllers
             FoliosController fichaServer = new FoliosController();
             List<Folios> fichaList = fichaServer.Get();
             string indexString = Convert.ToString(fichaList.Count + 1);
-
-            if (indexString.Length == 1)
-            {
-                return "00" + indexString;
-            }
-            else if (indexString.Length == 2)
-            {
-                return "0" + indexString;
-            }
             return indexString;
            
         }

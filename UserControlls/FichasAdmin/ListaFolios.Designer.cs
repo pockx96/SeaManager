@@ -181,11 +181,11 @@
             // 
             this.LblPendientes.AutoSize = true;
             this.LblPendientes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblPendientes.Font = new System.Drawing.Font("Liberation Sans Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPendientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPendientes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.LblPendientes.Location = new System.Drawing.Point(600, 22);
+            this.LblPendientes.Location = new System.Drawing.Point(572, 20);
             this.LblPendientes.Name = "LblPendientes";
-            this.LblPendientes.Size = new System.Drawing.Size(89, 22);
+            this.LblPendientes.Size = new System.Drawing.Size(105, 24);
             this.LblPendientes.TabIndex = 35;
             this.LblPendientes.Text = "Pendientes";
             this.LblPendientes.Click += new System.EventHandler(this.label1_Click);
@@ -202,11 +202,11 @@
             // 
             this.LblFinalizados.AutoSize = true;
             this.LblFinalizados.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LblFinalizados.Font = new System.Drawing.Font("Liberation Sans Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFinalizados.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblFinalizados.ForeColor = System.Drawing.Color.White;
             this.LblFinalizados.Location = new System.Drawing.Point(706, 22);
             this.LblFinalizados.Name = "LblFinalizados";
-            this.LblFinalizados.Size = new System.Drawing.Size(90, 22);
+            this.LblFinalizados.Size = new System.Drawing.Size(105, 24);
             this.LblFinalizados.TabIndex = 37;
             this.LblFinalizados.Text = "Finalizados";
             this.LblFinalizados.Click += new System.EventHandler(this.LblFinalizados_Click);
