@@ -30,6 +30,7 @@
         {
             this.PescadoContainer = new System.Windows.Forms.Panel();
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
+            this.TxtboxCantidad = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.LblCantidad = new System.Windows.Forms.Label();
             this.LblProducto = new System.Windows.Forms.Label();
             this.LblPresentacion = new System.Windows.Forms.Label();
-            this.TxtboxCantidad = new System.Windows.Forms.NumericUpDown();
             this.PescadoContainer.SuspendLayout();
             this.DatosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TxtboxCantidad)).BeginInit();
@@ -75,6 +75,15 @@
             this.DatosGroupBox.Size = new System.Drawing.Size(271, 342);
             this.DatosGroupBox.TabIndex = 23;
             this.DatosGroupBox.TabStop = false;
+            // 
+            // TxtboxCantidad
+            // 
+            this.TxtboxCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtboxCantidad.Location = new System.Drawing.Point(24, 225);
+            this.TxtboxCantidad.Name = "TxtboxCantidad";
+            this.TxtboxCantidad.Size = new System.Drawing.Size(120, 22);
+            this.TxtboxCantidad.TabIndex = 32;
+            this.TxtboxCantidad.ValueChanged += new System.EventHandler(this.TxtboxCantidad_ValueChanged);
             // 
             // label2
             // 
@@ -123,6 +132,7 @@
             this.CmBoxProducto.Name = "CmBoxProducto";
             this.CmBoxProducto.Size = new System.Drawing.Size(162, 23);
             this.CmBoxProducto.TabIndex = 14;
+            this.CmBoxProducto.SelectedIndexChanged += new System.EventHandler(this.CmBoxProducto_SelectedIndexChanged);
             // 
             // LblCantidad
             // 
@@ -156,14 +166,6 @@
             this.LblPresentacion.Size = new System.Drawing.Size(115, 17);
             this.LblPresentacion.TabIndex = 4;
             this.LblPresentacion.Text = "Presentación:";
-            // 
-            // TxtboxCantidad
-            // 
-            this.TxtboxCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtboxCantidad.Location = new System.Drawing.Point(24, 225);
-            this.TxtboxCantidad.Name = "TxtboxCantidad";
-            this.TxtboxCantidad.Size = new System.Drawing.Size(120, 22);
-            this.TxtboxCantidad.TabIndex = 32;
             // 
             // OtrosFicha
             // 

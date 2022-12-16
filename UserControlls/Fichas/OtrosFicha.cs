@@ -26,6 +26,9 @@ namespace MarDeCortezDsk.UserControlls
         {
             this.pescado = pescado;
         }
+        public string ProductoOtros { get; set; }
+        public string PresentacionOtros { get; set; }
+        public int CantidadOtros { get; set; }
 
         private void OtrosFicha_Load(object sender, EventArgs e)
         {
@@ -170,8 +173,17 @@ namespace MarDeCortezDsk.UserControlls
         }
         private void CmBoxPresentacion_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PresentacionOtros = CmBoxPresentacion.Text;
         }
 
-       
+        private void CmBoxProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProductoOtros = CmBoxProducto.Text;
+        }
+
+        private void TxtboxCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            CantidadOtros = Convert.ToInt32(TxtboxCantidad.Value);
+        }
     }
 }

@@ -352,9 +352,17 @@ namespace MarDeCortezDsk.UserControlls
                 case "Otros":
                     if (formOtro.ValidationForm())
                     {
-                        Pescado otroProducto = formOtro.GetProducto(Folio.IdFolio, Folio.id_proveedor);
-                        ListaPescado.Add(otroProducto);
-                        DatagridEntrada.Rows.Insert(index, otroProducto.Tipo_producto, otroProducto.Presentacion, otroProducto.Cantidad);
+                     Pescado pescado = new Pescado()
+                            {
+                                FolioEntrada = Folio.IdFolio,
+                                Almacenaje = Folio.id_proveedor,
+                                Tipo_producto = formOtro.ProductoOtros,
+                                Presentacion = formOtro.PresentacionOtros,
+                                Cantidad = formOtro.CantidadOtros,
+                                Kilos = KilosCalculation(formOtro.CantidadOtros, formOtro.PresentacionOtros)
+                            };
+                        DatagridEntrada.Rows.Insert(index, pescado.Tipo_producto, pescado.Presentacion, pescado.Cantidad);
+                        ListaPescado.Add(pescado);
                         formOtro.Clear();
                     }
                     break;
@@ -389,6 +397,12 @@ namespace MarDeCortezDsk.UserControlls
             switch (presentacion)
             {
                 case "kileado":
+                    kilos = cantidad;
+                    return kilos;
+                case "kilo":
+                    kilos = cantidad;
+                    return kilos;
+                case "suelto":
                     kilos = cantidad;
                     return kilos;
                 case "dos kilos":
