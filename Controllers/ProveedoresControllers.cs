@@ -14,6 +14,7 @@ namespace MarDeCortezDsk.Controllers
     public class ProveedoresControllers : Controller
     {
 
+
         public List<Proveedor> Get()
         {
             List<Proveedor> proveedors = new List<Proveedor>();

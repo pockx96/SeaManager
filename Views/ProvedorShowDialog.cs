@@ -23,21 +23,25 @@ namespace MarDeCortezDsk.Views
             InitializeComponent();
 
         }
+
+        public delegate void BackDelegate();
+        public event BackDelegate Back;
         private void ProvedorShowDialog_Load(object sender, EventArgs e)
         {
+
+
             LoadProveedores();
             nuevoProveedor.callback += new NuevoProveedor.CallbackDelegado(ResetScreen);
 
         }
-        public delegate void loadProveedorDelegate(string proveedor, string Usuario, string fecha);
+        public delegate void loadProveedorDelegate(string proveedor);
         public event loadProveedorDelegate loadProveedor;
 
 
 
 
         public string Proveedor { get; set; }
-        public string Usuario { get; set; }
-        public string Fecha { get; set; }   
+
 
         NuevoProveedor nuevoProveedor = new NuevoProveedor();
 
@@ -63,7 +67,7 @@ namespace MarDeCortezDsk.Views
             if (CmBoxProveedores.Text != "")
             {
                 this.Proveedor = CmBoxProveedores.Text;
-                loadProveedor(Proveedor,Usuario,Fecha);
+                loadProveedor(Proveedor);
                 this.Hide();
                 
             }
@@ -96,7 +100,13 @@ namespace MarDeCortezDsk.Views
 
         private void iconButton2_Click(object sender, EventArgs e)
         {
+            Back();
             this.Close();
+        }
+
+        private void TitleBar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

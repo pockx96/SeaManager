@@ -224,33 +224,29 @@ namespace MarDeCortezDsk.Controllers
 
             string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM camaron);INSERT INTO camaron VALUES (CONCAT('C-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{camaron.Tipo_producto}','{camaron.Kilos}','{camaron.Medida}','{camaron.Almacenaje}','{camaron.Presentacion}','{camaron.Cantidad}')";
 
-            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), @proveedor ,'{camaron.Tipo_producto}' ,'{camaron.Presentacion} {camaron.Medida}',@sumaCantidad,@sumaKilos)";
+            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), '{proveedor}' ,'{camaron.Tipo_producto}' ,'{camaron.Presentacion} {camaron.Medida}','{camaron.Cantidad}','{camaron.Kilos}')";
 
-            string queryInventarioUpdate = $"set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{camaron.Presentacion} {camaron.Medida}' and Producto = '{camaron.Tipo_producto}' and Proveedor = @proveedor";
+            string queryInventarioUpdate = $"set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = '{proveedor}' and Presentacion = '{camaron.Presentacion}' and Medida = '{camaron.Medida}');set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = '{proveedor}' and Presentacion = '{camaron.Presentacion}' and Medida = '{camaron.Medida}');update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{camaron.Presentacion} {camaron.Medida}' and Producto = '{camaron.Tipo_producto}' and Proveedor = '{proveedor}'";
 
 
             InventariosController inventariosController = new InventariosController();
             List<Inventario> list = inventariosController.Get(proveedor);
             string Presentacion = $"{camaron.Presentacion} {camaron.Medida}";
             string queryInvetario = "";
+
+            queryInvetario = queryInventarioInsert;
+
             foreach (Inventario element in list)
             {
-                if (element.Proveedor == proveedor && element.Presentacion == Presentacion)
+                if (element.Proveedor == proveedor && element.Presentacion == Presentacion && element.Producto == camaron.Tipo_producto)
                 {
 
                     queryInvetario = queryInventarioUpdate;
 
                 }
-                else 
-                {
-                    queryInvetario = queryInventarioInsert;
-                }
 
             }
-            if (list.Count == 0 )
-            {
-                queryInvetario = queryInventarioInsert;
-            }
+
 
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))

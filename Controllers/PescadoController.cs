@@ -245,23 +245,25 @@ namespace MarDeCortezDsk.Controllers
         {
 
             string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM pescado);INSERT INTO pescado VALUES (CONCAT('P-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{pescado.Tipo_producto}','{pescado.Almacenaje}','{pescado.Presentacion}','{pescado.Kilos}','{pescado.Cantidad}')";
-            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), @proveedor ,'{pescado.Tipo_producto}' ,'{pescado.Presentacion}',@sumaCantidad,@sumaKilos)";
 
-            string queryInventarioUpdate = $"set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{pescado.Presentacion}' and Producto = '{pescado.Tipo_producto}' and Proveedor = @proveedor";
+            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), '{proveedor}' ,'{pescado.Tipo_producto}' ,'{pescado.Presentacion}','{pescado.Cantidad}','{pescado.Kilos}')";
+
+            string queryInventarioUpdate = $"set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM pescado where Almacenaje = '{proveedor}' and Presentacion = '{pescado.Presentacion}');set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM pescado where Almacenaje = '{proveedor}' and Presentacion = '{pescado.Presentacion}');update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{pescado.Presentacion}' and Producto = '{pescado.Tipo_producto}' and Proveedor = '{proveedor}'";
 
 
             InventariosController inventariosController = new InventariosController();
             List<Inventario> list = inventariosController.Get(proveedor);
             string queryInvetario = "";
+
+            queryInvetario = queryInventarioInsert;
+
             foreach (Inventario element in list)
             {
-                if (element.Proveedor == proveedor && element.Presentacion == pescado.Presentacion)
+                if (element.Proveedor == proveedor && element.Presentacion == pescado.Presentacion && element.Producto == pescado.Tipo_producto)
                 {
+
                     queryInvetario = queryInventarioUpdate;
-                }
-                else
-                {
-                    queryInvetario = queryInventarioInsert;
+
                 }
 
             }
@@ -291,25 +293,44 @@ namespace MarDeCortezDsk.Controllers
         public void Post(Pescado pescado, string proveedor, Inventario inventario)
         {
             string query = $"set @idFolio = (SELECT IdFolio FROM folios ORDER BY IdFolio DESC LIMIT 1); set @Contador = (SELECT COUNT(*) FROM pescado);INSERT INTO pescado VALUES (CONCAT('P-', LPAD( (@Contador+1), 3, '0')), @idFolio,'{pescado.Tipo_producto}','{pescado.Almacenaje}','{pescado.Presentacion}','{pescado.Kilos}','{pescado.Cantidad}')";
+            string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), @proveedor ,'{pescado.Tipo_producto}' ,'{pescado.Presentacion}',@sumaCantidad,@sumaKilos)";
+
+            string queryInventarioUpdate = $"set @proveedor = (SELECT Almacenaje FROM camaron ORDER BY IdProducto DESC LIMIT 1);set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = @proveedor);update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{pescado.Presentacion}' and Producto = '{pescado.Tipo_producto}' and Proveedor = @proveedor";
+
 
             InventariosController inventariosController = new InventariosController();
             List<Inventario> list = inventariosController.Get(proveedor);
+            string queryInvetario = "";
             foreach (Inventario element in list)
             {
                 if (element.Proveedor == proveedor && element.Presentacion == pescado.Presentacion)
                 {
-                    inventariosController.Update(inventario, pescado.Cantidad, pescado.Kilos);
+
+                    queryInvetario = queryInventarioUpdate;
+
+                }
+                else
+                {
+                    queryInvetario = queryInventarioInsert;
                 }
 
             }
+            if (list.Count == 0)
+            {
+                queryInvetario = queryInventarioInsert;
+            }
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command2 = new MySqlCommand(queryInvetario, connection);
+
 
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
+                    command2.ExecuteNonQuery();
                     connection.Close();
 
                 }
@@ -320,6 +341,8 @@ namespace MarDeCortezDsk.Controllers
                 }
             }
         }
+           
+    
 
 
         public void Update(Pescado pescado, bool SumaResta)

@@ -42,9 +42,11 @@
             this.TxtBoxSearch = new CustomControls.RJControls.RJTextBox();
             this.iconButton3 = new FontAwesome.Sharp.IconButton();
             this.BtnBitacora = new FontAwesome.Sharp.IconButton();
-            this.iconButton2 = new FontAwesome.Sharp.IconButton();
-            this.botonRedondo1 = new MarDeCortezDsk.UserControlls.BotonRedondo();
+            this.BtnSalidas = new FontAwesome.Sharp.IconButton();
+            this.BgrndSalidas = new MarDeCortezDsk.UserControlls.BotonRedondo();
             this.CmboxProveedor = new System.Windows.Forms.ComboBox();
+            this.LblProveedor = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DatagridInventario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +64,7 @@
             this.BtnSearch.Size = new System.Drawing.Size(35, 34);
             this.BtnSearch.TabIndex = 28;
             this.BtnSearch.UseVisualStyleBackColor = false;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // DatagridInventario
             // 
@@ -96,7 +99,7 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DatagridInventario.DefaultCellStyle = dataGridViewCellStyle6;
             this.DatagridInventario.EnableHeadersVisualStyles = false;
-            this.DatagridInventario.Location = new System.Drawing.Point(72, 89);
+            this.DatagridInventario.Location = new System.Drawing.Point(78, 97);
             this.DatagridInventario.Name = "DatagridInventario";
             this.DatagridInventario.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -159,7 +162,7 @@
             this.TxtBoxSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtBoxSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.TxtBoxSearch.Location = new System.Drawing.Point(112, 26);
+            this.TxtBoxSearch.Location = new System.Drawing.Point(78, 26);
             this.TxtBoxSearch.Margin = new System.Windows.Forms.Padding(4);
             this.TxtBoxSearch.Multiline = false;
             this.TxtBoxSearch.Name = "TxtBoxSearch";
@@ -167,10 +170,11 @@
             this.TxtBoxSearch.PasswordChar = false;
             this.TxtBoxSearch.PlaceholderColor = System.Drawing.Color.DarkGray;
             this.TxtBoxSearch.PlaceholderText = "";
-            this.TxtBoxSearch.Size = new System.Drawing.Size(339, 31);
+            this.TxtBoxSearch.Size = new System.Drawing.Size(373, 31);
             this.TxtBoxSearch.TabIndex = 23;
             this.TxtBoxSearch.Texts = "";
             this.TxtBoxSearch.UnderlinedStyle = false;
+            this.TxtBoxSearch._TextChanged += new System.EventHandler(this.TxtBoxSearch__TextChanged);
             // 
             // iconButton3
             // 
@@ -185,7 +189,7 @@
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton3.IconSize = 30;
             this.iconButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iconButton3.Location = new System.Drawing.Point(14, 384);
+            this.iconButton3.Location = new System.Drawing.Point(60, 452);
             this.iconButton3.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton3.Name = "iconButton3";
             this.iconButton3.Size = new System.Drawing.Size(103, 36);
@@ -208,7 +212,7 @@
             this.BtnBitacora.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnBitacora.IconSize = 30;
             this.BtnBitacora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BtnBitacora.Location = new System.Drawing.Point(146, 384);
+            this.BtnBitacora.Location = new System.Drawing.Point(198, 452);
             this.BtnBitacora.Margin = new System.Windows.Forms.Padding(0);
             this.BtnBitacora.Name = "BtnBitacora";
             this.BtnBitacora.Size = new System.Drawing.Size(126, 36);
@@ -218,76 +222,116 @@
             this.BtnBitacora.UseVisualStyleBackColor = false;
             this.BtnBitacora.Click += new System.EventHandler(this.iconButton2_Click_1);
             // 
-            // iconButton2
+            // BtnSalidas
             // 
-            this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.iconButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton2.FlatAppearance.BorderSize = 0;
-            this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton2.ForeColor = System.Drawing.SystemColors.Control;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.ExternalLinkSquareAlt;
-            this.iconButton2.IconColor = System.Drawing.Color.White;
-            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 30;
-            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.iconButton2.Location = new System.Drawing.Point(556, 107);
-            this.iconButton2.Margin = new System.Windows.Forms.Padding(0);
-            this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Size = new System.Drawing.Size(120, 40);
-            this.iconButton2.TabIndex = 41;
-            this.iconButton2.Text = "Salidas";
-            this.iconButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.iconButton2.UseVisualStyleBackColor = false;
-            this.iconButton2.Click += new System.EventHandler(this.iconButton2_Click_2);
+            this.BtnSalidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnSalidas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSalidas.FlatAppearance.BorderSize = 0;
+            this.BtnSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSalidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSalidas.ForeColor = System.Drawing.SystemColors.Control;
+            this.BtnSalidas.IconChar = FontAwesome.Sharp.IconChar.CartArrowDown;
+            this.BtnSalidas.IconColor = System.Drawing.Color.White;
+            this.BtnSalidas.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BtnSalidas.IconSize = 40;
+            this.BtnSalidas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnSalidas.Location = new System.Drawing.Point(629, 311);
+            this.BtnSalidas.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnSalidas.Name = "BtnSalidas";
+            this.BtnSalidas.Size = new System.Drawing.Size(214, 50);
+            this.BtnSalidas.TabIndex = 41;
+            this.BtnSalidas.Text = "Salida de producto";
+            this.BtnSalidas.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.BtnSalidas.UseVisualStyleBackColor = false;
+            this.BtnSalidas.Click += new System.EventHandler(this.iconButton2_Click_2);
             // 
-            // botonRedondo1
+            // BgrndSalidas
             // 
-            this.botonRedondo1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.botonRedondo1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.botonRedondo1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(217)))), ((int)(((byte)(115)))), ((int)(((byte)(26)))));
-            this.botonRedondo1.BorderRadius = 20;
-            this.botonRedondo1.BorderSize = 0;
-            this.botonRedondo1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.botonRedondo1.FlatAppearance.BorderSize = 0;
-            this.botonRedondo1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botonRedondo1.ForeColor = System.Drawing.Color.White;
-            this.botonRedondo1.Location = new System.Drawing.Point(531, 104);
-            this.botonRedondo1.Name = "botonRedondo1";
-            this.botonRedondo1.Size = new System.Drawing.Size(160, 45);
-            this.botonRedondo1.TabIndex = 42;
-            this.botonRedondo1.Text = "botonRedondo1";
-            this.botonRedondo1.TextColor = System.Drawing.Color.White;
-            this.botonRedondo1.UseVisualStyleBackColor = false;
-            this.botonRedondo1.Click += new System.EventHandler(this.botonRedondo1_Click);
+            this.BgrndSalidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BgrndSalidas.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BgrndSalidas.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(217)))), ((int)(((byte)(115)))), ((int)(((byte)(26)))));
+            this.BgrndSalidas.BorderRadius = 20;
+            this.BgrndSalidas.BorderSize = 0;
+            this.BgrndSalidas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BgrndSalidas.FlatAppearance.BorderSize = 0;
+            this.BgrndSalidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BgrndSalidas.ForeColor = System.Drawing.Color.White;
+            this.BgrndSalidas.Location = new System.Drawing.Point(612, 305);
+            this.BgrndSalidas.Name = "BgrndSalidas";
+            this.BgrndSalidas.Size = new System.Drawing.Size(242, 57);
+            this.BgrndSalidas.TabIndex = 42;
+            this.BgrndSalidas.Text = "botonRedondo1";
+            this.BgrndSalidas.TextColor = System.Drawing.Color.White;
+            this.BgrndSalidas.UseVisualStyleBackColor = false;
+            this.BgrndSalidas.Click += new System.EventHandler(this.botonRedondo1_Click);
             // 
             // CmboxProveedor
             // 
+            this.CmboxProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmboxProveedor.FormattingEnabled = true;
-            this.CmboxProveedor.Location = new System.Drawing.Point(546, 35);
+            this.CmboxProveedor.Location = new System.Drawing.Point(472, 36);
             this.CmboxProveedor.Name = "CmboxProveedor";
-            this.CmboxProveedor.Size = new System.Drawing.Size(121, 21);
+            this.CmboxProveedor.Size = new System.Drawing.Size(121, 24);
             this.CmboxProveedor.TabIndex = 43;
+            this.CmboxProveedor.Visible = false;
             this.CmboxProveedor.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // LblProveedor
+            // 
+            this.LblProveedor.AutoSize = true;
+            this.LblProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblProveedor.ForeColor = System.Drawing.SystemColors.Control;
+            this.LblProveedor.Location = new System.Drawing.Point(478, 13);
+            this.LblProveedor.Name = "LblProveedor";
+            this.LblProveedor.Size = new System.Drawing.Size(98, 20);
+            this.LblProveedor.TabIndex = 44;
+            this.LblProveedor.Text = "Proveedores";
+            this.LblProveedor.Visible = false;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.Transparent;
+            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.Color.White;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Home;
+            this.iconButton1.IconColor = System.Drawing.SystemColors.ButtonFace;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 30;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.iconButton1.Location = new System.Drawing.Point(728, 21);
+            this.iconButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(126, 36);
+            this.iconButton1.TabIndex = 45;
+            this.iconButton1.Text = "Tienda";
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click_1);
             // 
             // Inventarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.LblProveedor);
             this.Controls.Add(this.CmboxProveedor);
-            this.Controls.Add(this.iconButton2);
-            this.Controls.Add(this.botonRedondo1);
+            this.Controls.Add(this.BtnSalidas);
+            this.Controls.Add(this.BgrndSalidas);
             this.Controls.Add(this.BtnBitacora);
             this.Controls.Add(this.iconButton3);
             this.Controls.Add(this.TxtBoxSearch);
             this.Controls.Add(this.DatagridInventario);
             this.Controls.Add(this.BtnSearch);
             this.Name = "Inventarios";
-            this.Size = new System.Drawing.Size(691, 440);
+            this.Size = new System.Drawing.Size(876, 500);
             this.Load += new System.EventHandler(this.Inventarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DatagridInventario)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -302,8 +346,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Kilos;
         private FontAwesome.Sharp.IconButton iconButton3;
         private FontAwesome.Sharp.IconButton BtnBitacora;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private BotonRedondo botonRedondo1;
+        private FontAwesome.Sharp.IconButton BtnSalidas;
+        private BotonRedondo BgrndSalidas;
         private System.Windows.Forms.ComboBox CmboxProveedor;
+        private System.Windows.Forms.Label LblProveedor;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

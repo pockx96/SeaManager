@@ -36,7 +36,6 @@ namespace MarDeCortezDsk.UserControlls
         }
 
 
-        List<Pescado> ListPescado = new List<Pescado>();
         Pescado pescado = new Pescado();
         CatalogoProductoController productoController = new CatalogoProductoController();
         CatalogoPresentacionController presentacionController = new CatalogoPresentacionController();
@@ -86,15 +85,12 @@ namespace MarDeCortezDsk.UserControlls
         public Pescado GetProducto(string FichaEntrada, string almacenaje)
         {
 
-            PescadoController controller = new PescadoController();
-            pescado.IdProducto = controller.NewId();
             pescado.FolioEntrada = FichaEntrada;
             pescado.Tipo_producto = CmBoxProducto.Text;
             pescado.Presentacion = CmBoxPresentacion.Text;
             pescado.Almacenaje = almacenaje;
             pescado.Cantidad = Convert.ToInt32(TxtboxCantidad.Text);
             pescado.Kilos = KilosCalculation(pescado.Cantidad,pescado.Presentacion);
-            ListPescado.Add(pescado);
             return pescado;
 
         }

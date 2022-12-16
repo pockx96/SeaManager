@@ -59,7 +59,6 @@ namespace MarDeCortezDsk.UserControlls
         public Camaron GetRow(string Folio, string Almacenaje)
         {
             Camaron camaron = new Camaron();
-            CamaronController controller = new CamaronController();
             camaron.FolioEntrada = Folio;
             camaron.Tipo_producto = "Camaron";
             camaron.Presentacion = TxtBoxPresentacion.Text;

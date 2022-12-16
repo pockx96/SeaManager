@@ -36,8 +36,7 @@ namespace MarDeCortezDsk.UserControlls
         public int CantidadPescado { get; set; }
 
 
-        List<Pescado> ListPescado = new List<Pescado>();
-        Pescado pescado = new Pescado();
+        public Pescado _Pescado { get; set; }
         CatalogoProductoController productoController = new CatalogoProductoController();
         CatalogoPresentacionController presentacionController = new CatalogoPresentacionController();
 
@@ -83,20 +82,19 @@ namespace MarDeCortezDsk.UserControlls
  
 
 
-        public Pescado GetProducto(string folio,string almacenaje)
+        public void GetProducto()
         {
 
-            PescadoController controller = new PescadoController();
-            pescado.IdProducto = controller.NewId();
-            pescado.FolioEntrada = folio;
-            pescado.Tipo_producto = CmBoxProducto.Text;
-            pescado.Presentacion = CmBoxPresentacion.Text;
-            pescado.Almacenaje = almacenaje;
-            pescado.Cantidad = Convert.ToInt32(TxtboxCantidad.Text);
-            pescado.Kilos = KilosCalculation(pescado.Cantidad,pescado.Presentacion);
-            ListPescado.Add(pescado);
-            return pescado;
+            _Pescado.Tipo_producto = CmBoxProducto.Text;
+            _Pescado.Presentacion = CmBoxPresentacion.Text;
+            _Pescado.Cantidad = Convert.ToInt32(TxtboxCantidad.Text);
+            _Pescado.Kilos = KilosCalculation(_Pescado.Cantidad,_Pescado.Presentacion);
 
+        }
+
+        public Pescado GetPescado()
+        {
+            return _Pescado;
         }
 
         public bool ValidationForm()
@@ -265,13 +263,30 @@ namespace MarDeCortezDsk.UserControlls
 
         private void CmBoxPaquete_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TipoPescado = CmBoxProducto.Text;
 
         }
 
-    
-       
+        private void CmBoxProducto_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmBoxPresentacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
 
 
+        }
+
+        private void CmBoxPresentacion_TextChanged(object sender, EventArgs e)
+        {
+            PresentacionPescado = CmBoxPresentacion.Text;
+        }
+
+        private void TxtboxCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            CantidadPescado = Convert.ToInt32(TxtboxCantidad.Value);
+        }
     }
 }

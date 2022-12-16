@@ -47,16 +47,17 @@
             // 
             // ContainerForm
             // 
-            this.ContainerForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.ContainerForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(61)))), ((int)(((byte)(121)))));
             this.ContainerForm.BorderColor = System.Drawing.Color.White;
             this.ContainerForm.Controls.Add(this.ContainerTileBar);
             this.ContainerForm.Controls.Add(this.ContainerProveedor);
             this.ContainerForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContainerForm.Edge = 20;
-            this.ContainerForm.Location = new System.Drawing.Point(10, 10);
+            this.ContainerForm.Location = new System.Drawing.Point(0, 0);
+            this.ContainerForm.Margin = new System.Windows.Forms.Padding(0);
             this.ContainerForm.Name = "ContainerForm";
             this.ContainerForm.Padding = new System.Windows.Forms.Padding(10, 75, 10, 10);
-            this.ContainerForm.Size = new System.Drawing.Size(337, 536);
+            this.ContainerForm.Size = new System.Drawing.Size(357, 556);
             this.ContainerForm.TabIndex = 13;
             this.ContainerForm.Paint += new System.Windows.Forms.PaintEventHandler(this.sPanel1_Paint);
             // 
@@ -69,7 +70,7 @@
             this.ContainerTileBar.Edge = 20;
             this.ContainerTileBar.Location = new System.Drawing.Point(0, 0);
             this.ContainerTileBar.Name = "ContainerTileBar";
-            this.ContainerTileBar.Size = new System.Drawing.Size(337, 72);
+            this.ContainerTileBar.Size = new System.Drawing.Size(359, 72);
             this.ContainerTileBar.TabIndex = 32;
             // 
             // iconButton2
@@ -102,7 +103,7 @@
             this.TitleBar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.TitleBar.IconSize = 35;
             this.TitleBar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.TitleBar.Location = new System.Drawing.Point(31, 6);
+            this.TitleBar.Location = new System.Drawing.Point(48, 5);
             this.TitleBar.Margin = new System.Windows.Forms.Padding(0);
             this.TitleBar.Name = "TitleBar";
             this.TitleBar.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
@@ -112,9 +113,11 @@
             this.TitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TitleBar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.TitleBar.UseVisualStyleBackColor = false;
+            this.TitleBar.Click += new System.EventHandler(this.TitleBar_Click);
             // 
             // ContainerProveedor
             // 
+            this.ContainerProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(61)))), ((int)(((byte)(121)))));
             this.ContainerProveedor.Controls.Add(this.label5);
             this.ContainerProveedor.Controls.Add(this.BtnUser);
             this.ContainerProveedor.Controls.Add(this.BtnProveedorAdd);
@@ -124,7 +127,7 @@
             this.ContainerProveedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContainerProveedor.Location = new System.Drawing.Point(10, 75);
             this.ContainerProveedor.Name = "ContainerProveedor";
-            this.ContainerProveedor.Size = new System.Drawing.Size(317, 451);
+            this.ContainerProveedor.Size = new System.Drawing.Size(337, 471);
             this.ContainerProveedor.TabIndex = 34;
             this.ContainerProveedor.TabStop = false;
             // 
@@ -132,7 +135,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(43, 254);
+            this.label5.Location = new System.Drawing.Point(62, 250);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(229, 13);
             this.label5.TabIndex = 36;
@@ -149,7 +152,7 @@
             this.BtnUser.IconColor = System.Drawing.Color.White;
             this.BtnUser.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnUser.IconSize = 80;
-            this.BtnUser.Location = new System.Drawing.Point(123, 19);
+            this.BtnUser.Location = new System.Drawing.Point(136, 22);
             this.BtnUser.Name = "BtnUser";
             this.BtnUser.Size = new System.Drawing.Size(71, 85);
             this.BtnUser.TabIndex = 31;
@@ -163,7 +166,7 @@
             this.BtnProveedorAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnProveedorAdd.Font = new System.Drawing.Font("Liberation Sans", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnProveedorAdd.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.BtnProveedorAdd.Location = new System.Drawing.Point(44, 397);
+            this.BtnProveedorAdd.Location = new System.Drawing.Point(58, 397);
             this.BtnProveedorAdd.Name = "BtnProveedorAdd";
             this.BtnProveedorAdd.Size = new System.Drawing.Size(228, 28);
             this.BtnProveedorAdd.TabIndex = 33;
@@ -173,21 +176,21 @@
             // 
             // BtnCalculadoraTotal
             // 
-            this.BtnCalculadoraTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(115)))), ((int)(((byte)(26)))));
-            this.BtnCalculadoraTotal.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(115)))), ((int)(((byte)(26)))));
+            this.BtnCalculadoraTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(156)))), ((int)(((byte)(255)))));
+            this.BtnCalculadoraTotal.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(156)))), ((int)(((byte)(255)))));
             this.BtnCalculadoraTotal.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.BtnCalculadoraTotal.BorderRadius = 20;
             this.BtnCalculadoraTotal.BorderSize = 0;
             this.BtnCalculadoraTotal.FlatAppearance.BorderSize = 0;
             this.BtnCalculadoraTotal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCalculadoraTotal.Font = new System.Drawing.Font("Liberation Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCalculadoraTotal.ForeColor = System.Drawing.Color.White;
-            this.BtnCalculadoraTotal.Location = new System.Drawing.Point(37, 339);
+            this.BtnCalculadoraTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(61)))), ((int)(((byte)(121)))));
+            this.BtnCalculadoraTotal.Location = new System.Drawing.Point(50, 338);
             this.BtnCalculadoraTotal.Name = "BtnCalculadoraTotal";
             this.BtnCalculadoraTotal.Size = new System.Drawing.Size(243, 40);
             this.BtnCalculadoraTotal.TabIndex = 12;
             this.BtnCalculadoraTotal.Text = "Confirmar";
-            this.BtnCalculadoraTotal.TextColor = System.Drawing.Color.White;
+            this.BtnCalculadoraTotal.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(61)))), ((int)(((byte)(121)))));
             this.BtnCalculadoraTotal.UseVisualStyleBackColor = false;
             this.BtnCalculadoraTotal.Click += new System.EventHandler(this.BtnCalculadoraTotal_Click);
             // 
@@ -197,7 +200,7 @@
             this.LblProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.LblProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblProveedor.ForeColor = System.Drawing.SystemColors.Control;
-            this.LblProveedor.Location = new System.Drawing.Point(63, 116);
+            this.LblProveedor.Location = new System.Drawing.Point(75, 116);
             this.LblProveedor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblProveedor.Name = "LblProveedor";
             this.LblProveedor.Size = new System.Drawing.Size(190, 26);
@@ -208,7 +211,7 @@
             // 
             this.CmBoxProveedores.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmBoxProveedores.FormattingEnabled = true;
-            this.CmBoxProveedores.Location = new System.Drawing.Point(46, 194);
+            this.CmBoxProveedores.Location = new System.Drawing.Point(65, 193);
             this.CmBoxProveedores.Name = "CmBoxProveedores";
             this.CmBoxProveedores.Size = new System.Drawing.Size(224, 28);
             this.CmBoxProveedores.TabIndex = 10;
@@ -217,12 +220,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(357, 556);
             this.Controls.Add(this.ContainerForm);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ProvedorShowDialog";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Seleccione un Proveedor";
             this.Load += new System.EventHandler(this.ProvedorShowDialog_Load);

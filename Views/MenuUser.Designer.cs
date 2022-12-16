@@ -73,7 +73,6 @@
             this.BtnFolios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnFolios.UseVisualStyleBackColor = false;
             this.BtnFolios.Click += new System.EventHandler(this.BtnFichas_Click);
-            this.BtnFolios.MouseHover += new System.EventHandler(this.BtnFichas_MouseHover);
             // 
             // BtnInventario
             // 
@@ -94,7 +93,6 @@
             this.BtnInventario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnInventario.UseVisualStyleBackColor = false;
             this.BtnInventario.Click += new System.EventHandler(this.BtnInventario_Click);
-            this.BtnInventario.MouseHover += new System.EventHandler(this.BtnInventario_MouseHover);
             // 
             // BtnSesion
             // 
@@ -115,15 +113,14 @@
             this.BtnSesion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnSesion.UseVisualStyleBackColor = false;
             this.BtnSesion.Click += new System.EventHandler(this.BtnUser_Click);
-            this.BtnSesion.MouseHover += new System.EventHandler(this.BtnUser_MouseHover);
             // 
             // MenuContainer
             // 
             this.MenuContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.MenuContainer.Controls.Add(this.BtnOtros);
-            this.MenuContainer.Controls.Add(this.BtnCamaron);
-            this.MenuContainer.Controls.Add(this.BtnPescado);
             this.MenuContainer.Controls.Add(this.BtnNuevoFolio);
+            this.MenuContainer.Controls.Add(this.BtnOtros);
+            this.MenuContainer.Controls.Add(this.BtnPescado);
+            this.MenuContainer.Controls.Add(this.BtnCamaron);
             this.MenuContainer.Controls.Add(this.BtnTienda);
             this.MenuContainer.Controls.Add(this.BtnProveedor);
             this.MenuContainer.Controls.Add(this.BtnSesion);
@@ -134,7 +131,6 @@
             this.MenuContainer.Name = "MenuContainer";
             this.MenuContainer.Size = new System.Drawing.Size(154, 448);
             this.MenuContainer.TabIndex = 13;
-            this.MenuContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.MenuContainer_Paint);
             // 
             // BtnOtros
             // 
@@ -146,7 +142,7 @@
             this.BtnOtros.ForeColor = System.Drawing.SystemColors.Control;
             this.BtnOtros.Image = global::MarDeCortezDsk.Properties.Resources.seashell;
             this.BtnOtros.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOtros.Location = new System.Drawing.Point(51, 383);
+            this.BtnOtros.Location = new System.Drawing.Point(5, 322);
             this.BtnOtros.Margin = new System.Windows.Forms.Padding(0);
             this.BtnOtros.Name = "BtnOtros";
             this.BtnOtros.Size = new System.Drawing.Size(151, 64);
@@ -168,7 +164,7 @@
             this.BtnCamaron.ForeColor = System.Drawing.SystemColors.Control;
             this.BtnCamaron.Image = global::MarDeCortezDsk.Properties.Resources.shrimp_white;
             this.BtnCamaron.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCamaron.Location = new System.Drawing.Point(51, 234);
+            this.BtnCamaron.Location = new System.Drawing.Point(9, 258);
             this.BtnCamaron.Margin = new System.Windows.Forms.Padding(0);
             this.BtnCamaron.Name = "BtnCamaron";
             this.BtnCamaron.Size = new System.Drawing.Size(151, 64);
@@ -189,7 +185,7 @@
             this.BtnPescado.ForeColor = System.Drawing.SystemColors.Control;
             this.BtnPescado.Image = global::MarDeCortezDsk.Properties.Resources.fish_white;
             this.BtnPescado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnPescado.Location = new System.Drawing.Point(51, 300);
+            this.BtnPescado.Location = new System.Drawing.Point(6, 286);
             this.BtnPescado.Margin = new System.Windows.Forms.Padding(0);
             this.BtnPescado.Name = "BtnPescado";
             this.BtnPescado.Size = new System.Drawing.Size(151, 64);
@@ -287,7 +283,7 @@
             // CalendarioContainer
             // 
             this.CalendarioContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            this.CalendarioContainer.Fecha = "05-12-2022";
+            this.CalendarioContainer.Fecha = "15-12-2022";
             this.CalendarioContainer.Location = new System.Drawing.Point(732, 24);
             this.CalendarioContainer.Name = "CalendarioContainer";
             this.CalendarioContainer.Size = new System.Drawing.Size(131, 31);
@@ -327,7 +323,6 @@
             this.PanelForm.Padding = new System.Windows.Forms.Padding(160, 15, 160, 0);
             this.PanelForm.Size = new System.Drawing.Size(876, 532);
             this.PanelForm.TabIndex = 14;
-            this.PanelForm.Paint += new System.Windows.Forms.PaintEventHandler(this.sPanel1_Paint);
             // 
             // ContainerComponents
             // 

@@ -30,6 +30,7 @@
         {
             this.PescadoContainer = new System.Windows.Forms.Panel();
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
+            this.TxtboxCantidad = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CmBoxPresentacion = new System.Windows.Forms.ComboBox();
@@ -41,7 +42,6 @@
             this.LblPresentacion = new System.Windows.Forms.Label();
             this.LblTipo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TxtboxCantidad = new System.Windows.Forms.NumericUpDown();
             this.PescadoContainer.SuspendLayout();
             this.DatosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TxtboxCantidad)).BeginInit();
@@ -83,6 +83,14 @@
             this.DatosGroupBox.TabStop = false;
             this.DatosGroupBox.Enter += new System.EventHandler(this.DatosGroupBox_Enter);
             // 
+            // TxtboxCantidad
+            // 
+            this.TxtboxCantidad.Location = new System.Drawing.Point(24, 296);
+            this.TxtboxCantidad.Name = "TxtboxCantidad";
+            this.TxtboxCantidad.Size = new System.Drawing.Size(120, 26);
+            this.TxtboxCantidad.TabIndex = 34;
+            this.TxtboxCantidad.ValueChanged += new System.EventHandler(this.TxtboxCantidad_ValueChanged);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -114,6 +122,8 @@
             this.CmBoxPresentacion.Name = "CmBoxPresentacion";
             this.CmBoxPresentacion.Size = new System.Drawing.Size(162, 23);
             this.CmBoxPresentacion.TabIndex = 17;
+            this.CmBoxPresentacion.SelectedIndexChanged += new System.EventHandler(this.CmBoxPresentacion_SelectedIndexChanged);
+            this.CmBoxPresentacion.TextChanged += new System.EventHandler(this.CmBoxPresentacion_TextChanged);
             // 
             // RBtnEmpaquetado
             // 
@@ -138,6 +148,7 @@
             this.CmBoxProducto.Size = new System.Drawing.Size(162, 23);
             this.CmBoxProducto.TabIndex = 14;
             this.CmBoxProducto.SelectedIndexChanged += new System.EventHandler(this.CmBoxPaquete_SelectedIndexChanged);
+            this.CmBoxProducto.TextChanged += new System.EventHandler(this.CmBoxProducto_TextChanged);
             // 
             // RbtnEntero
             // 
@@ -204,13 +215,6 @@
             this.label1.TabIndex = 31;
             this.label1.Text = "_________________________________";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // TxtboxCantidad
-            // 
-            this.TxtboxCantidad.Location = new System.Drawing.Point(24, 296);
-            this.TxtboxCantidad.Name = "TxtboxCantidad";
-            this.TxtboxCantidad.Size = new System.Drawing.Size(120, 26);
-            this.TxtboxCantidad.TabIndex = 34;
             // 
             // PescadoFicha
             // 

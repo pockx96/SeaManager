@@ -645,6 +645,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PlantillaSalida.html" />
     <None Include="Resources\exclamation.png" />
     <None Include="Resources\ejemplo.jpg" />
     <Content Include="AppIco.ico" />

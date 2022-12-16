@@ -28,15 +28,18 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             else
             {
                 BtnBitacora.Visible = false;
+                
             }
         }
 
-
+        InventariosController inventariosController = new InventariosController();
         private void Inventarios_Load(object sender, EventArgs e)
         {
 
-            LoadData();
-            LoadProveedores();
+            List<Inventario> ListInventarios = inventariosController.Get("Tienda");
+            LoadInventario(ListInventarios);
+            LoadProveedoreCmBox();
+            CmboxProveedor.Text = "Tienda";
         }
 
         public delegate void BitacoraDelegate();
@@ -48,33 +51,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         }
 
-        public void LoadProveedores()
-        {
-            ProveedoresControllers proveedoresControllers = new ProveedoresControllers();
-            List<Proveedor> ListProveedores = proveedoresControllers.Get();
-            foreach (Proveedor proveedor in ListProveedores)
-            {
-                CmboxProveedor.Items.Add(proveedor.nombre_proveedor);
-            }
-        }
 
-        public void LoadData()
-        {
-            PescadoController pescadoController = new PescadoController();
-            List<Pescado> pescadoList = pescadoController.GetByProveedor("Tienda");
-            CamaronController camaronController = new CamaronController();
-            List<Camaron> CamaronList = camaronController.GetByProveedor("Tienda");
-            List<Pescado> ListInventario = pescadoController.MixList(CamaronList, pescadoList);
-            DatagridInventario.Rows.Clear();
-            int index;
-            foreach (Pescado element in ListInventario)
-            {
-                index = DatagridInventario.RowCount;
-
-                DatagridInventario.Rows.Insert(index, element.IdProducto,element.Tipo_producto, element.Presentacion, element.Cantidad, element.Kilos);
-
-            }
-        }
 
 
 
@@ -83,9 +60,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         private void DatagridInventario_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            Animations animations = new Animations();
-            Point LocationEliminar = animations.BtnlocationDatagrid(DatagridInventario, 277, Cursor.Position.Y, new Point(463, 96), 12);
-            DatagridInventario.CurrentRow.Selected = true;
+
             
         }
 
@@ -169,14 +144,73 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            InventariosController inventariosController = new InventariosController();
             List<Inventario> ListInventarios = inventariosController.Get(CmboxProveedor.Text);
+            DatagridInventario.Rows.Clear();
+            LoadInventarios(ListInventarios);
+
+        }
+
+
+        bool flagCmBox = false ;
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            if (flagCmBox)
+            {
+                CmboxProveedor.Visible = false;
+                LblProveedor.Visible = false;
+                BtnSearch.Location = new Point(458, 23);
+                flagCmBox = false;
+            }
+            else
+            {
+                LblProveedor.Visible = true;
+                CmboxProveedor.Visible = true;
+                BtnSearch.Location = new Point(612, 26);
+                flagCmBox = true;
+
+            }
+
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton1_Click_1(object sender, EventArgs e)
+        {
+            
+            List<Inventario> ListInventarios = inventariosController.Get("Tienda");
+            CmboxProveedor.Text = "Tienda";
+            LoadInventario(ListInventarios);
+        }
+        
+        private void LoadInventario(List<Inventario> list)
+        {
             int index;
             DatagridInventario.Rows.Clear();
-            foreach (Inventario inventarios in ListInventarios)
+            foreach (Inventario inventarios in list)
             {
                 index = DatagridInventario.Rows.Count;
-                DatagridInventario.Rows.Insert(index, inventarios.IdInventario,inventarios.Producto,inventarios.Presentacion,inventarios.Cantidad,inventarios.Kilos);
+                DatagridInventario.Rows.Insert(index, inventarios.IdInventario, inventarios.Producto, inventarios.Presentacion, inventarios.Cantidad, inventarios.Kilos);
+            }
+        }
+
+        private void TxtBoxSearch__TextChanged(object sender, EventArgs e)
+        {
+            List<Inventario> Listinventarios = inventariosController.Get(CmboxProveedor.Text);
+            var lst = Listinventarios.Where(f => f.Producto.Contains(TxtBoxSearch.Texts)).ToList();
+            LoadInventario(lst);
+
+        }
+
+        private void LoadProveedoreCmBox()
+        {
+            ProveedoresControllers proveedoresControllers = new ProveedoresControllers();
+            List<Proveedor> proveedors = proveedoresControllers.Get();
+            foreach(Proveedor proveedor in proveedors)
+            {
+                CmboxProveedor.Items.Add(proveedor.nombre_proveedor);
             }
 
         }

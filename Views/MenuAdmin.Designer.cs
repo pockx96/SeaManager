@@ -33,12 +33,12 @@
             this.BtnInventario = new FontAwesome.Sharp.IconButton();
             this.BtnUser = new FontAwesome.Sharp.IconButton();
             this.MenuContainer = new System.Windows.Forms.Panel();
-            this.BtnProducto = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.BtnAjustes = new FontAwesome.Sharp.IconButton();
             this.BtnOtros = new System.Windows.Forms.Button();
             this.BtnCamaron = new System.Windows.Forms.Button();
             this.BtnPescado = new System.Windows.Forms.Button();
+            this.BtnProducto = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.BtnAjustes = new FontAwesome.Sharp.IconButton();
             this.ContainerTileBar = new MarDeCortezDsk.UserControlls.SPanel();
             this.RelogContainer = new MarDeCortezDsk.UserControlls.Relog();
             this.CalendarioContainer = new MarDeCortezDsk.UserControlls.Calendario();
@@ -132,6 +132,70 @@
             this.MenuContainer.Size = new System.Drawing.Size(154, 448);
             this.MenuContainer.TabIndex = 13;
             // 
+            // BtnOtros
+            // 
+            this.BtnOtros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnOtros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnOtros.FlatAppearance.BorderSize = 0;
+            this.BtnOtros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOtros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnOtros.ForeColor = System.Drawing.SystemColors.Control;
+            this.BtnOtros.Image = global::MarDeCortezDsk.Properties.Resources.seashell;
+            this.BtnOtros.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnOtros.Location = new System.Drawing.Point(7, 341);
+            this.BtnOtros.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnOtros.Name = "BtnOtros";
+            this.BtnOtros.Size = new System.Drawing.Size(151, 64);
+            this.BtnOtros.TabIndex = 15;
+            this.BtnOtros.Text = "   Otros";
+            this.BtnOtros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnOtros.UseVisualStyleBackColor = false;
+            this.BtnOtros.Visible = false;
+            this.BtnOtros.Click += new System.EventHandler(this.BtnOtros_Click);
+            // 
+            // BtnCamaron
+            // 
+            this.BtnCamaron.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnCamaron.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnCamaron.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnCamaron.FlatAppearance.BorderSize = 0;
+            this.BtnCamaron.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCamaron.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCamaron.ForeColor = System.Drawing.SystemColors.Control;
+            this.BtnCamaron.Image = global::MarDeCortezDsk.Properties.Resources.shrimp_white;
+            this.BtnCamaron.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnCamaron.Location = new System.Drawing.Point(7, 192);
+            this.BtnCamaron.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnCamaron.Name = "BtnCamaron";
+            this.BtnCamaron.Size = new System.Drawing.Size(151, 64);
+            this.BtnCamaron.TabIndex = 13;
+            this.BtnCamaron.Text = "   Camarón";
+            this.BtnCamaron.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnCamaron.UseVisualStyleBackColor = false;
+            this.BtnCamaron.Visible = false;
+            this.BtnCamaron.Click += new System.EventHandler(this.BtnCamaron_Click_1);
+            // 
+            // BtnPescado
+            // 
+            this.BtnPescado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnPescado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnPescado.FlatAppearance.BorderSize = 0;
+            this.BtnPescado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPescado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnPescado.ForeColor = System.Drawing.SystemColors.Control;
+            this.BtnPescado.Image = global::MarDeCortezDsk.Properties.Resources.fish_white;
+            this.BtnPescado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnPescado.Location = new System.Drawing.Point(7, 258);
+            this.BtnPescado.Margin = new System.Windows.Forms.Padding(0);
+            this.BtnPescado.Name = "BtnPescado";
+            this.BtnPescado.Size = new System.Drawing.Size(151, 64);
+            this.BtnPescado.TabIndex = 14;
+            this.BtnPescado.Text = "   Pescado";
+            this.BtnPescado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnPescado.UseVisualStyleBackColor = false;
+            this.BtnPescado.Visible = false;
+            this.BtnPescado.Click += new System.EventHandler(this.BtnPescado_Click);
+            // 
             // BtnProducto
             // 
             this.BtnProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
@@ -192,70 +256,6 @@
             this.BtnAjustes.UseVisualStyleBackColor = false;
             this.BtnAjustes.Click += new System.EventHandler(this.BtnAjustes_Click_1);
             // 
-            // BtnOtros
-            // 
-            this.BtnOtros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.BtnOtros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnOtros.FlatAppearance.BorderSize = 0;
-            this.BtnOtros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnOtros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnOtros.ForeColor = System.Drawing.SystemColors.Control;
-            this.BtnOtros.Image = global::MarDeCortezDsk.Properties.Resources.seashell;
-            this.BtnOtros.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnOtros.Location = new System.Drawing.Point(32, 341);
-            this.BtnOtros.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnOtros.Name = "BtnOtros";
-            this.BtnOtros.Size = new System.Drawing.Size(151, 64);
-            this.BtnOtros.TabIndex = 15;
-            this.BtnOtros.Text = "   Otros";
-            this.BtnOtros.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnOtros.UseVisualStyleBackColor = false;
-            this.BtnOtros.Visible = false;
-            this.BtnOtros.Click += new System.EventHandler(this.BtnOtros_Click);
-            // 
-            // BtnCamaron
-            // 
-            this.BtnCamaron.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.BtnCamaron.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnCamaron.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BtnCamaron.FlatAppearance.BorderSize = 0;
-            this.BtnCamaron.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCamaron.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCamaron.ForeColor = System.Drawing.SystemColors.Control;
-            this.BtnCamaron.Image = global::MarDeCortezDsk.Properties.Resources.shrimp_white;
-            this.BtnCamaron.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnCamaron.Location = new System.Drawing.Point(32, 192);
-            this.BtnCamaron.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnCamaron.Name = "BtnCamaron";
-            this.BtnCamaron.Size = new System.Drawing.Size(151, 64);
-            this.BtnCamaron.TabIndex = 13;
-            this.BtnCamaron.Text = "   Camarón";
-            this.BtnCamaron.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnCamaron.UseVisualStyleBackColor = false;
-            this.BtnCamaron.Visible = false;
-            this.BtnCamaron.Click += new System.EventHandler(this.BtnCamaron_Click_1);
-            // 
-            // BtnPescado
-            // 
-            this.BtnPescado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.BtnPescado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BtnPescado.FlatAppearance.BorderSize = 0;
-            this.BtnPescado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnPescado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnPescado.ForeColor = System.Drawing.SystemColors.Control;
-            this.BtnPescado.Image = global::MarDeCortezDsk.Properties.Resources.fish_white;
-            this.BtnPescado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnPescado.Location = new System.Drawing.Point(32, 258);
-            this.BtnPescado.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnPescado.Name = "BtnPescado";
-            this.BtnPescado.Size = new System.Drawing.Size(151, 64);
-            this.BtnPescado.TabIndex = 14;
-            this.BtnPescado.Text = "   Pescado";
-            this.BtnPescado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BtnPescado.UseVisualStyleBackColor = false;
-            this.BtnPescado.Visible = false;
-            this.BtnPescado.Click += new System.EventHandler(this.BtnPescado_Click);
-            // 
             // ContainerTileBar
             // 
             this.ContainerTileBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
@@ -281,7 +281,7 @@
             // CalendarioContainer
             // 
             this.CalendarioContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.CalendarioContainer.Fecha = "13-12-2022";
+            this.CalendarioContainer.Fecha = "14-12-2022";
             this.CalendarioContainer.Location = new System.Drawing.Point(732, 24);
             this.CalendarioContainer.Name = "CalendarioContainer";
             this.CalendarioContainer.Size = new System.Drawing.Size(131, 31);

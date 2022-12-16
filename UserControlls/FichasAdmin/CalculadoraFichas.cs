@@ -125,6 +125,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
+
             IsEmptyCell = false;
             ValidarCelda();
             if (IsEmptyCell == false)
@@ -132,7 +133,6 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                 SaveFileDialog savefile = new SaveFileDialog();//guarda el pdf en una carpeta de destino
                 savefile.FileName = string.Format("{0}.pdf", DateTime.Now.ToString("ddMMyyyyHHmm"));//nombra el archivo en base a la fecha 
                 string PaginaHTML_Texto = Properties.Resources.Plantilla.ToString();//estructura html esto le da el formaato a el recibo 
-                                                                                    //PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", comboBox1.Text);
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", "ficha de proveedor");
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@Folio", Folio);
@@ -253,16 +253,23 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         
         private void iconButton1_Click(object sender, EventArgs e)
         {
+            FoliosController foliosController = new FoliosController();
+            Folios folioString = foliosController.Get(Folio);
             IsEmptyCell = false;
+
+            string proveedor = folioString.id_proveedor;
             ValidarCelda();
             if (IsEmptyCell == false)
             {
                 SaveFileDialog savefile = new SaveFileDialog();//guarda el pdf en una carpeta de destino
-                savefile.FileName = string.Format("{0}.pdf", DateTime.Now.ToString("ddMMyyyyHHmm"));//nombra el archivo en base a la fecha 
+                savefile.FileName = string.Format("Factura", DateTime.Now.ToString("ddMMyyyyHHmm"));//nombra el archivo en base a la fecha 
+                savefile.DefaultExt = "pdf";
                 string PaginaHTML_Texto = Properties.Resources.Plantilla.ToString();//estructura html esto le da el formaato a el recibo 
-                                                                                    //PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", comboBox1.Text);
+                                                                                    
+                PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", proveedor);
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", "Folio de ingreso de producto");
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
+                PaginaHTML_Texto = PaginaHTML_Texto.Replace("@Folio", Folio);
 
                 string filas = string.Empty;
                 decimal total = 0;
@@ -324,16 +331,24 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void BtnFichas_Click(object sender, EventArgs e)
         {
+            FoliosController foliosController = new FoliosController();
+            Folios folioString = foliosController.Get(Folio);
+            IsEmptyCell = false;
+
+            string proveedor = folioString.id_proveedor;
             IsEmptyCell = false;
             ValidarCelda();
             if (IsEmptyCell == false)
             {
                 SaveFileDialog savefile = new SaveFileDialog();//guarda el pdf en una carpeta de destino
-                savefile.FileName = string.Format("{0}.pdf", DateTime.Now.ToString("ddMMyyyyHHmm"));//nombra el archivo en base a la fecha 
+                savefile.FileName = string.Format("Cotizacion", DateTime.Now.ToString("ddMMyyyyHHmm"));//nombra el archivo en base a la fecha 
+                savefile.DefaultExt = "pdf";
                 string PaginaHTML_Texto = Properties.Resources.Plantilla.ToString();//estructura html esto le da el formaato a el recibo 
-                                                                                    //PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", comboBox1.Text);
+                                                                                    
+                PaginaHTML_Texto = PaginaHTML_Texto.Replace("@CLIENTE", proveedor);
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@DOCUMENTO", "Solo Cotizacion ");
                 PaginaHTML_Texto = PaginaHTML_Texto.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy"));
+                PaginaHTML_Texto = PaginaHTML_Texto.Replace("@Folio", "cotizacion");
 
                 string filas = string.Empty;
                 decimal total = 0;

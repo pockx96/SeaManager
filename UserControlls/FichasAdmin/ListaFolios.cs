@@ -36,6 +36,7 @@ namespace MarDeCortezDsk.UserControlls
         public event CalcularDelegate Calcular;
         string Usuario { get; set; }
 
+
         public void LoadData(string estado,string usuario)
         {
             
