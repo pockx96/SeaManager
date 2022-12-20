@@ -31,10 +31,13 @@ namespace MarDeCortezDsk.UserControlls
             if (_SumaTrue_RestaFalse)
             {
                 this.Post += new PostDelegate(SumasInventarios);
+                this.ProductoAdd += new ProductoAddDelegate(SumaProductoAdd);
+
             }
             else
             {
                 this.Post += new PostDelegate(RestasInventarios);
+                this.ProductoAdd += new ProductoAddDelegate(RestaProductoAdd);
             }
 
 
@@ -64,6 +67,7 @@ namespace MarDeCortezDsk.UserControlls
 
         List<Pescado> ListaPescado = new List<Pescado>();
         List<Camaron> ListaCamaron = new List<Camaron>();
+        List<Inventario> ListInventario;
 
         public delegate void RestartDelegate();
         public event RestartDelegate Restart;
@@ -71,9 +75,14 @@ namespace MarDeCortezDsk.UserControlls
         public delegate void PostDelegate();
         public event PostDelegate Post;
 
+
+        public delegate void ProductoAddDelegate();
+        public event ProductoAddDelegate ProductoAdd;
         private void CarritoProducto_Load(object sender, EventArgs e)
         {
             CamaronAdd();
+            InventariosController inventariosController = new InventariosController();
+            ListInventario = inventariosController.Get(Folio.id_proveedor);
 
         }
 
@@ -114,11 +123,11 @@ namespace MarDeCortezDsk.UserControlls
         }
 
 
-        private void SumasInventarios()
-        {
             PescadoController pescadoController = new PescadoController();
             CamaronController camaronController = new CamaronController();
             FoliosController foliosController = new FoliosController();
+        private void SumasInventarios()
+        {
 
 
             if (DatagridEntrada.RowCount > 0)
@@ -319,6 +328,12 @@ namespace MarDeCortezDsk.UserControlls
 
         private void iconButton4_Click(object sender, EventArgs e)
         {
+
+            ProductoAdd();
+        }
+
+        private void SumaProductoAdd()
+        {
             int index = DatagridEntrada.RowCount;
             switch (formularioActual)
             {
@@ -339,7 +354,7 @@ namespace MarDeCortezDsk.UserControlls
                             FolioEntrada = Folio.IdFolio,
                             Almacenaje = Folio.id_proveedor,
                             Tipo_producto = formPescado.TipoPescado,
-                            Presentacion =formPescado.PresentacionPescado,
+                            Presentacion = formPescado.PresentacionPescado,
                             Cantidad = formPescado.CantidadPescado,
                             Kilos = KilosCalculation(formPescado.CantidadPescado, formPescado.PresentacionPescado)
                         };
@@ -352,15 +367,15 @@ namespace MarDeCortezDsk.UserControlls
                 case "Otros":
                     if (formOtro.ValidationForm())
                     {
-                     Pescado pescado = new Pescado()
-                            {
-                                FolioEntrada = Folio.IdFolio,
-                                Almacenaje = Folio.id_proveedor,
-                                Tipo_producto = formOtro.ProductoOtros,
-                                Presentacion = formOtro.PresentacionOtros,
-                                Cantidad = formOtro.CantidadOtros,
-                                Kilos = KilosCalculation(formOtro.CantidadOtros, formOtro.PresentacionOtros)
-                            };
+                        Pescado pescado = new Pescado()
+                        {
+                            FolioEntrada = Folio.IdFolio,
+                            Almacenaje = Folio.id_proveedor,
+                            Tipo_producto = formOtro.ProductoOtros,
+                            Presentacion = formOtro.PresentacionOtros,
+                            Cantidad = formOtro.CantidadOtros,
+                            Kilos = KilosCalculation(formOtro.CantidadOtros, formOtro.PresentacionOtros)
+                        };
                         DatagridEntrada.Rows.Insert(index, pescado.Tipo_producto, pescado.Presentacion, pescado.Cantidad);
                         ListaPescado.Add(pescado);
                         formOtro.Clear();
@@ -369,7 +384,129 @@ namespace MarDeCortezDsk.UserControlls
 
             }
 
-       
+        }
+        private void RestaProductoAdd()
+        {
+            
+            
+            int index = DatagridEntrada.RowCount;
+            switch (formularioActual)
+            {
+                case "Camaron":
+                    if (formCamaron.ValidationForm())
+                    {
+                        Camaron camaron = formCamaron.GetRow(Folio.IdFolio, Folio.id_proveedor);
+                        var Lst = ListInventario.Where(f => f.Presentacion == $"{camaron.Presentacion} {camaron.Medida}" && f.Producto == camaron.Tipo_producto);
+                        int leghtList = Lst.Count();
+                        if (leghtList <= 0)
+                        {
+                            DialogResult resul = RJMessageBox.Show("No se cuenta con este producto en inventario!.", "Revise su inventario!");
+                        }
+                        foreach(Inventario element in Lst)
+                        {
+                            if (element.Cantidad>=camaron.Cantidad)
+                            {                              
+                                ListaCamaron.Add(camaron);
+                                DatagridEntrada.Rows.Insert(index, camaron.Tipo_producto, camaron.Presentacion, camaron.Cantidad);
+                                formCamaron.Clear();
+                                ListInventario.Remove(element);
+                                element.Cantidad = (element.Cantidad - camaron.Cantidad);
+                                ListInventario.Add(element);
+                                break;
+                            }
+                            else
+                            {
+                                DialogResult resul = RJMessageBox.Show($"Cantidad en Inventario Insuficiente , Cantidad Actual: {element.Cantidad}!.","Revise su inventario!");
+                            }
+                        }
+                        
+                    }
+                    break;
+                case "Pescado":
+                    if (formPescado.ValidationForm())
+                    {
+                        Pescado pescado = new Pescado()
+                        {
+                            FolioEntrada = Folio.IdFolio,
+                            Almacenaje = Folio.id_proveedor,
+                            Tipo_producto = formPescado.TipoPescado,
+                            Presentacion = formPescado.PresentacionPescado,
+                            Cantidad = formPescado.CantidadPescado,
+                            Kilos = KilosCalculation(formPescado.CantidadPescado, formPescado.PresentacionPescado)
+                        };
+
+
+                        var Lst = ListInventario.Where(f => f.Presentacion == pescado.Presentacion && f.Producto == pescado.Tipo_producto);
+
+                        int leghtList = Lst.Count();
+                        if (leghtList <= 0)
+                        {
+                            DialogResult resul = RJMessageBox.Show("No se cuenta con este producto en inventario!.", "Revise su inventario!");
+                        }
+                        foreach (Inventario element in Lst)
+                        {
+                            if (element.Cantidad >= pescado.Cantidad)
+                            {
+                                DatagridEntrada.Rows.Insert(index, pescado.Tipo_producto, pescado.Presentacion, pescado.Cantidad);
+                                ListaPescado.Add(pescado);
+                                formPescado.Clear();
+                                ListInventario.Remove(element);
+                                element.Cantidad = (element.Cantidad - pescado.Cantidad);
+                                ListInventario.Add(element);
+                                break;
+                            }
+                            else
+                            {
+                                DialogResult resul = RJMessageBox.Show($"Cantidad en Inventario Insuficiente , Cantidad Actual: {element.Cantidad}!.", "Revise su inventario!");
+                            }
+                        }
+
+                    }
+            
+                    break;
+
+                case "Otros":
+                    if (formOtro.ValidationForm())
+                    {
+                        Pescado pescado = new Pescado()
+                        {
+                            FolioEntrada = Folio.IdFolio,
+                            Almacenaje = Folio.id_proveedor,
+                            Tipo_producto = formOtro.ProductoOtros,
+                            Presentacion = formOtro.PresentacionOtros,
+                            Cantidad = formOtro.CantidadOtros,
+                            Kilos = KilosCalculation(formOtro.CantidadOtros, formOtro.PresentacionOtros)
+                        };
+
+                        var Lst = ListInventario.Where(f => f.Presentacion == pescado.Presentacion && f.Producto == pescado.Tipo_producto);
+
+                        int leghtList = Lst.Count();
+                        if (leghtList <= 0)
+                        {
+                            DialogResult resul = RJMessageBox.Show("No se cuenta con este producto en inventario!.", "Revise su inventario!");
+                        }
+                        foreach (Inventario element in Lst)
+                        {
+                            if (element.Cantidad >= pescado.Cantidad)
+                            {
+                                DatagridEntrada.Rows.Insert(index, pescado.Tipo_producto, pescado.Presentacion, pescado.Cantidad);
+                                ListaPescado.Add(pescado);
+                                formPescado.Clear();
+                                ListInventario.Remove(element);
+                                element.Cantidad = (element.Cantidad - pescado.Cantidad);
+                                ListInventario.Add(element);
+                                break;
+                            }
+                            else
+                            {
+                                DialogResult resul = RJMessageBox.Show($"Cantidad en Inventario Insuficiente , Cantidad Actual: {element.Cantidad}!.", "Revise su inventario!");
+                            }
+                        }
+                    }
+                    break;
+
+            }
+
         }
 
 

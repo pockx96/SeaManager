@@ -37,7 +37,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         {
 
             List<Inventario> ListInventarios = inventariosController.Get("Tienda");
-            LoadInventario(ListInventarios);
+            LoadInventarios(ListInventarios);
             LoadProveedoreCmBox();
             CmboxProveedor.Text = "Tienda";
         }
@@ -49,6 +49,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         private void ListaEntrada_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        
         }
 
 
@@ -70,7 +71,8 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         {
             DatagridInventario.Rows.Clear();
             int index;
-            foreach (Inventario element in inventarios)
+            var lstSort = inventarios.Where(f => f.Cantidad > 0);
+            foreach (Inventario element in lstSort)
             {
                 index = DatagridInventario.RowCount;
                 DatagridInventario.Rows.Insert(index, element.IdInventario,element.Producto, element.Presentacion, element.Cantidad, element.Kilos);
@@ -182,25 +184,16 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             
             List<Inventario> ListInventarios = inventariosController.Get("Tienda");
             CmboxProveedor.Text = "Tienda";
-            LoadInventario(ListInventarios);
+            LoadInventarios(ListInventarios);
         }
         
-        private void LoadInventario(List<Inventario> list)
-        {
-            int index;
-            DatagridInventario.Rows.Clear();
-            foreach (Inventario inventarios in list)
-            {
-                index = DatagridInventario.Rows.Count;
-                DatagridInventario.Rows.Insert(index, inventarios.IdInventario, inventarios.Producto, inventarios.Presentacion, inventarios.Cantidad, inventarios.Kilos);
-            }
-        }
+
 
         private void TxtBoxSearch__TextChanged(object sender, EventArgs e)
         {
             List<Inventario> Listinventarios = inventariosController.Get(CmboxProveedor.Text);
             var lst = Listinventarios.Where(f => f.Producto.Contains(TxtBoxSearch.Texts)).ToList();
-            LoadInventario(lst);
+            LoadInventarios(lst);
 
         }
 
