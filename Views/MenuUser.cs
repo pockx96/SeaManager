@@ -31,7 +31,7 @@ namespace MarDeCortezDsk.Views
         private void MenuAdmin_Load(object sender, EventArgs e)
         {
             FichaEntradaAdd();
-            ActivateButton(BtnFolios, RGBColors.color1);
+            
             Fecha = CalendarioContainer.Fecha;
             TitleUsuario.Title(Usuario);
         }
@@ -59,6 +59,7 @@ namespace MarDeCortezDsk.Views
         /// <summary>
         private void FichaEntradaAdd()
         {
+            ActivateButton(BtnFolios, RGBColors.color1);
             ListaFolios listaFolios = new ListaFolios(Usuario);
             listaFolios.LoadData("Pendiente",Usuario);
             listaFolios.Calcular += new ListaFolios.CalcularDelegate(Calcular);
@@ -278,18 +279,21 @@ namespace MarDeCortezDsk.Views
                 case "Inventario":
                     BtnInventario.Location = new Point(2, 3);
                     BtnTienda.Visible = false;
-                    BtnNuevoFolio.Visible = true;
+                    BtnNuevoFolio.Visible = false;
+                    ActivateButton(BtnInventario, RGBColors.color1);
                     break;
                 case "Tienda":
                     BtnTienda.Location = new Point(2, 3);
                     BtnInventario.Visible = false;
                     BtnNuevoFolio.Visible = false;
+                    ActivateButton(BtnTienda, RGBColors.color1);
                     break;
                 case "Nuevo Folio":
                     BtnNuevoFolio.Visible = true;
                     BtnNuevoFolio.Location = new Point(0,0);
                     BtnInventario.Visible = false;
                     BtnTienda.Visible = false;
+                    ActivateButton(BtnNuevoFolio, RGBColors.color1);
                     break;
             }
             ShowBtnProducto();
@@ -355,10 +359,6 @@ namespace MarDeCortezDsk.Views
                 CurrentBtnProduct.TextAlign = ContentAlignment.MiddleCenter;
                 CurrentBtnProduct.ImageAlign = ContentAlignment.MiddleRight;
                 CurrentBtnProduct.ForeColor = color;
-                //Left border button
-                leftBorderBtn.Location = new Point(2,3);
-                leftBorderBtn.Visible = true;
-                leftBorderBtn.BringToFront();
             }
         }
 

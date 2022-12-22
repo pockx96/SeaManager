@@ -247,10 +247,9 @@ namespace MarDeCortezDsk.UserControlls
             CamaronController camaronController = new CamaronController();
             FoliosController foliosController = new FoliosController();
 
-
             if (DatagridEntrada.RowCount > 0)
             {
-                var result = RJMessageBox.Show("¿Desea confirmar esta entrada?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                var result = RJMessageBox.Show("¿Desea confirmar esta salida?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
                     Folio.Estado = "Salida de inventario";
@@ -281,7 +280,7 @@ namespace MarDeCortezDsk.UserControlls
 
                         foreach (Inventario inventario in listInvetarios)
                         {
-                            if (inventario.Proveedor == Folio.id_proveedor && inventario.Presentacion == Presentacion)
+                            if (inventario.Proveedor == Folio.id_proveedor && inventario.Presentacion == Presentacion && pescado.Tipo_producto == inventario.Producto)
                             {
                                 inventariosController.Update(inventario, pescado.Cantidad, pescado.Kilos);
 
@@ -290,7 +289,7 @@ namespace MarDeCortezDsk.UserControlls
                     }
 
                     ImprimiPDF();
-                    DialogResult resul = RJMessageBox.Show("Productos agregados con exito!.",
+                    DialogResult resul = RJMessageBox.Show("Productos expedidos con exito!.",
                      "Aviso!");
                     Clear();
                     Restart();
@@ -491,7 +490,7 @@ namespace MarDeCortezDsk.UserControlls
                             {
                                 DatagridEntrada.Rows.Insert(index, pescado.Tipo_producto, pescado.Presentacion, pescado.Cantidad);
                                 ListaPescado.Add(pescado);
-                                formPescado.Clear();
+                                formOtro.Clear();
                                 ListInventario.Remove(element);
                                 element.Cantidad = (element.Cantidad - pescado.Cantidad);
                                 ListInventario.Add(element);

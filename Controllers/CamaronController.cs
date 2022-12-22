@@ -226,7 +226,7 @@ namespace MarDeCortezDsk.Controllers
 
             string queryInventarioInsert = $"set @Contador = (SELECT COUNT(*) FROM Inventarios);INSERT INTO Inventarios VALUES (CONCAT('I-', LPAD( (@Contador+1), 3, '0')), '{proveedor}' ,'{camaron.Tipo_producto}' ,'{camaron.Presentacion} {camaron.Medida}','{camaron.Cantidad}','{camaron.Kilos}')";
 
-            string queryInventarioUpdate = $"set @sumaCantidad =(SELECT SUM(Cantidad) AS TotalItemsOrdered FROM camaron where Almacenaje = '{proveedor}' and Presentacion = '{camaron.Presentacion}' and Medida = '{camaron.Medida}');set @sumaKilos =(SELECT SUM(Kilos) AS TotalItemsOrdered FROM camaron where Almacenaje = '{proveedor}' and Presentacion = '{camaron.Presentacion}' and Medida = '{camaron.Medida}');update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{camaron.Presentacion} {camaron.Medida}' and Producto = '{camaron.Tipo_producto}' and Proveedor = '{proveedor}'";
+            string queryInventarioUpdate = $"set @sumaCantidad =(SELECT Cantidad FROM Inventarios where Proveedor = '{proveedor}' and Presentacion = '{camaron.Presentacion} {camaron.Medida}')+{camaron.Cantidad};set @sumaKilos =(SELECT Kilos FROM Inventarios where Proveedor = '{proveedor}' and Presentacion = '{camaron.Presentacion} {camaron.Medida}')+{camaron.Kilos};update Inventarios set Cantidad = @sumaCantidad , Kilos = @sumaKilos where Presentacion = '{camaron.Presentacion} {camaron.Medida}' and Producto = '{camaron.Tipo_producto}' and Proveedor = '{proveedor}'";
 
 
             InventariosController inventariosController = new InventariosController();
