@@ -341,7 +341,7 @@ namespace MarDeCortezDsk.UserControlls
                     {
                         Camaron camaron = formCamaron.GetRow(Folio.IdFolio, Folio.id_proveedor);
                         ListaCamaron.Add(camaron);
-                        DatagridEntrada.Rows.Insert(index, camaron.Tipo_producto, camaron.Presentacion, camaron.Cantidad);
+                        DatagridEntrada.Rows.Insert(index, camaron.Tipo_producto, ($"{camaron.Presentacion} {camaron.Medida}"), camaron.Cantidad);
                         formCamaron.Clear();
                     }
                     break;
@@ -406,7 +406,7 @@ namespace MarDeCortezDsk.UserControlls
                             if (element.Cantidad>=camaron.Cantidad)
                             {                              
                                 ListaCamaron.Add(camaron);
-                                DatagridEntrada.Rows.Insert(index, camaron.Tipo_producto, camaron.Presentacion, camaron.Cantidad);
+                                DatagridEntrada.Rows.Insert(index, camaron.Tipo_producto, ($"{camaron.Presentacion} {camaron.Medida}"), camaron.Cantidad);
                                 formCamaron.Clear();
                                 ListInventario.Remove(element);
                                 element.Cantidad = (element.Cantidad - camaron.Cantidad);
@@ -511,16 +511,47 @@ namespace MarDeCortezDsk.UserControlls
 
         private void ListaEntrada_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (DatagridEntrada.RowCount > 1)
+            if (DatagridEntrada.RowCount > 0)
             {
                 var result = RJMessageBox.Show("¿Desea Eliminar este producto?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
-                    Camaron camaronDelete = ListaCamaron.Where(c => c.IdProducto == DatagridEntrada.CurrentRow.Cells[0].Value.ToString()).First();
-                    Pescado pescadoDelete = ListaPescado.Where(c => c.IdProducto == DatagridEntrada.CurrentRow.Cells[0].Value.ToString()).First();
+                    string producto = Convert.ToString(DatagridEntrada.CurrentRow.Cells[0].Value);
+                    string presentacion = Convert.ToString(DatagridEntrada.CurrentRow.Cells[1].Value);
+                    Camaron camaronDelete = new Camaron();
+                    Pescado pescadoDelete = new Pescado();
 
-                    ListaPescado.Remove(pescadoDelete);
-                    ListaCamaron.Remove(camaronDelete);
+                    if (producto == "Camaron")
+                    {
+                        foreach(Camaron camaron in ListaCamaron)
+                        {
+                            if (($"{camaron.Presentacion} {camaron.Medida}")== presentacion)
+                            {
+                                camaronDelete = camaron;
+                            }
+                        }
+                        if(camaronDelete.Presentacion!= null)
+                        {
+                            ListaCamaron.Remove(camaronDelete);
+
+                        }
+                    }
+                    else 
+                    {
+                        foreach (Pescado pescado in ListaPescado)
+                        {
+                            if (pescado.Presentacion == presentacion && pescado.Tipo_producto == producto)
+                            {
+                                pescadoDelete = pescado;
+                            }
+                        }
+                        if (pescadoDelete.Presentacion != null)
+                        {
+                            ListaPescado.Remove(pescadoDelete);
+
+                        }
+                    }
+
                     DatagridEntrada.Rows.Remove(DatagridEntrada.CurrentRow);
 
                 }
