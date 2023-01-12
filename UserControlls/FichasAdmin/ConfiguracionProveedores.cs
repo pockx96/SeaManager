@@ -11,14 +11,21 @@ using MarDeCortezDsk.Controllers;
 using MarDeCortezDsk.Models;
 using MarDeCortezDsk.UserControlls;
 using MarDeCortezDsk.Styles;
+using CustomMessageBox;
 
 namespace MarDeCortezDsk.UserControlls.FichasAdmin
 {
     public partial class ConfiguracionProveedores : UserControl
     {
-        public ConfiguracionProveedores()
+        public ConfiguracionProveedores(CrearDelegate _crear,EditarDelegate _editar)
         {
             InitializeComponent();
+            labelCrear labelCrear = new labelCrear("Crear nuevo proveedor") { Location = new Point(44, 26) };
+            this.Controls.Add(labelCrear);
+            this.Crear += new CrearDelegate(_crear);
+            this.Editar += new EditarDelegate(_editar);
+            labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
+
         }
 
         public delegate void GetProveedorDelegate(Proveedor proveedor);
@@ -28,29 +35,55 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public delegate void CrearDelegate();
         public event CrearDelegate Crear;
 
-        public delegate void DelegateEditar();
-        public event DelegateEditar Editar;
+        public delegate void EditarDelegate(Proveedor proveedor);
+        public event EditarDelegate Editar;
 
         public delegate void DelegateDetalles();
         public event DelegateDetalles Detalles;
 
-        ProveedoresControllers proveedorServise = new ProveedoresControllers();
+        ProveedoresControllers proveedorController = new ProveedoresControllers();
 
         private void DatagridUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Animations animations = new Animations();
-            Point location = animations.BtnlocationDatagrid(DatagridProveedor,340,Cursor.Position.Y,new Point(475, 117),12);
-            BotonesEdicion.Location = location;
-            Proveedor proveedor = proveedorServise.Get(DatagridProveedor.CurrentRow.Cells[0].Value.ToString());
-            GetProveedor(proveedor);
+
             DatagridProveedor.CurrentRow.Selected = true;
+            if (DatagridProveedor.RowCount > 0)
+            {
+                if (DatagridProveedor.Columns[e.ColumnIndex].Name == "editar")
+                {
+                    Proveedor proveedor = proveedorController.Get(Convert.ToString(DatagridProveedor.CurrentRow.Cells[0].Value));
+                    Editar(proveedor);
+                }
+                else if (DatagridProveedor.Columns[e.ColumnIndex].Name == "borrar")
+                {
+                    var dialogBoxOption = RJMessageBox.Show("¿Desea Eliminar este folio?", "Advertencia una vez eliminado no podra recuperarse", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialogBoxOption == DialogResult.OK)
+                    {
+                        proveedorController.Delete(DatagridProveedor.CurrentRow.Cells[0].Value.ToString());
+                        DatagridProveedor.Rows.Remove(DatagridProveedor.CurrentRow);
+                    }
+                }
+            }
         }
+        
 
         private void CofiguariosUsuarios_Load(object sender, EventArgs e)
         {
-            labelCrear labelCrear = new labelCrear("Crear nuevo proveedor"){ Location = new Point(44, 26) };
-            this.Controls.Add(labelCrear);
-            List<Proveedor> listaProveedor = proveedorServise.Get();
+
+
+
+
+        }
+
+
+        private void BotonesEdicion_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConfiguracionProveedores_Load(object sender, EventArgs e)
+        {
+            List<Proveedor> listaProveedor = proveedorController.Get();
             int index;
             foreach (Proveedor element in listaProveedor)
             {
@@ -58,27 +91,6 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                 DatagridProveedor.Rows.Insert(index, element.id_proveedor, element.nombre_proveedor, element.telefono_proveedor);
             }
 
-            if (Editar != null && /*Detalles != null &&*/ Crear != null)
-            {
-
-                BotonesEdicion.eliminar += new botonesEdicion.eliminarDelegate(Eliminar);
-                BotonesEdicion.editar += new botonesEdicion.editarDelegate(Editar);
-                /*BotonesEdicion.detalles += new botonesEdicion.detallerDelegate(Detalles);*/
-                labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
-
-            }
-
-            DatagridProveedor.CurrentRow.Selected = true;
-        }
-
-        private void Eliminar()
-        {
-            if (DatagridProveedor.Rows.Count>0)
-            {
-                proveedorServise.Delete(DatagridProveedor.CurrentRow.Cells[0].Value.ToString());
-                DatagridProveedor.Rows.Remove(DatagridProveedor.CurrentRow);
-
-            }
         }
     }
 }

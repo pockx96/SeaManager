@@ -19,11 +19,18 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             InitializeComponent();
         }
 
-
-
+        CofiguariosUsuarios MainUsuariosView;
+        NuevoUsuario nuevoUsuarioView;
+        NuevoUsuario actualizarUsuarios;
         private void UserConfig_Load(object sender, EventArgs e)
         {
+            MainUsuariosView = new CofiguariosUsuarios(Crear,Actualizar) { Location = new Point(0, 0) };
+            nuevoUsuarioView = new NuevoUsuario() { Location = new Point(0, 0) };
+            nuevoUsuarioView.OnBack += new NuevoUsuario.backDelegate(StartPage);
+            nuevoUsuarioView.TitleChange += new NuevoUsuario.TitleDelegate(UpdateTitle);           
             StartPage();
+
+
         }
 
         public Usuarios Usuario { get; set; }
@@ -31,14 +38,11 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         public void StartPage()
         {
+            UsuariosContainer.Controls.Add(MainUsuariosView);
             TitleBar.Text = "Configuración de usuarios";
             TitleBar.IconChar = FontAwesome.Sharp.IconChar.UserCog;
-            CofiguariosUsuarios cofiguariosUsuarios = new CofiguariosUsuarios() { Location = new Point(0,0)};
-            cofiguariosUsuarios.Crear += new CofiguariosUsuarios.CrearDelegate(Crear);
-            cofiguariosUsuarios.Editar += new CofiguariosUsuarios.DelegateEditar(Actualizar);
-            cofiguariosUsuarios.GetUsuario += new CofiguariosUsuarios.GetUsuarioDelegate(RefreshUser);
             UsuariosContainer.Controls.Clear();
-            UsuariosContainer.Controls.Add(cofiguariosUsuarios);
+            UsuariosContainer.Controls.Add(MainUsuariosView);
 
 
         }
@@ -46,21 +50,18 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public void Crear()
         {
             TitleBar.Text = "Creación de usuarios";
-            NuevoUsuario nuevo = new NuevoUsuario() { Location = new Point(0, 0) };
-            nuevo.OnBack += new NuevoUsuario.backDelegate(StartPage);
-            nuevo.TitleChange += new NuevoUsuario.TitleDelegate(UpdateTitle);
+
             UsuariosContainer.Controls.Clear();
-            UsuariosContainer.Controls.Add(nuevo);
+            UsuariosContainer.Controls.Add(nuevoUsuarioView);
         }
 
-        public void Actualizar()
+        public void Actualizar(Usuarios usuarios)
         {
+            actualizarUsuarios = new NuevoUsuario(usuarios) { Location = new Point(0, 0) };
+            actualizarUsuarios.OnBack += new NuevoUsuario.backDelegate(StartPage);
             TitleBar.Text = "Modificación de usuarios";
-            NuevoUsuario actualizar = new NuevoUsuario(Usuario) { Location = new Point(0, 0) };
-            actualizar.OnBack += new NuevoUsuario.backDelegate(StartPage);
-            actualizar.TitleChange += new NuevoUsuario.TitleDelegate(UpdateTitle);
             UsuariosContainer.Controls.Clear();
-            UsuariosContainer.Controls.Add(actualizar);
+            UsuariosContainer.Controls.Add(actualizarUsuarios);
         }
 
         public void RefreshUser(Usuarios usuario)
@@ -86,7 +87,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         }
         private void label1_Click(object sender, EventArgs e)
         {
-            NuevoUsuario nuevoUsuario = new NuevoUsuario();
+
         }
 
         private void UsuariosContainer_Paint(object sender, PaintEventArgs e)

@@ -16,34 +16,41 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 {
     public partial class CofiguariosUsuarios : UserControl
     {
-        public CofiguariosUsuarios()
+        public CofiguariosUsuarios(CrearDelegate _crear, EditarDelegate _editar)
         {
             InitializeComponent();
+            this.Edit += new CofiguariosUsuarios.EditarDelegate(_editar);
+            this.Crear += new CofiguariosUsuarios.CrearDelegate(_crear);
+
         }
 
-        public delegate void GetUsuarioDelegate(Usuarios usuarios);
-        public event GetUsuarioDelegate GetUsuario;
 
 
         public delegate void CrearDelegate();
         public event CrearDelegate Crear;
 
-        public delegate void DelegateEditar();
-        public event DelegateEditar Editar;
+        public delegate void EditarDelegate(Usuarios usuarios);
+        public event EditarDelegate Edit;
 
-       public delegate void DelegateDetalles();
-        public event DelegateDetalles Detalles;
+        UsuarioController usuarioController = new UsuarioController();
 
 
         private void DatagridUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Animations animations = new Animations();
-            Point location = animations.BtnlocationDatagrid(DatagridUsuarios,340,Cursor.Position.Y,new Point(460, 116),12);
-            BotonesEdicion.Location = location;
-            UsuarioController usuarioServise = new UsuarioController();
-            Usuarios usuarios = usuarioServise.Get(DatagridUsuarios.CurrentRow.Cells[0].Value.ToString());
-            GetUsuario(usuarios);
-            DatagridUsuarios.CurrentRow.Selected = true;
+            if (DatagridUsuarios.Rows.Count > 0)
+            {
+                if (DatagridUsuarios.Columns[e.ColumnIndex].Name == "Editar")
+                {
+                    Usuarios usuarios = usuarioController.Get(Convert.ToString(DatagridUsuarios.CurrentRow.Cells[0].Value));
+                    Edit(usuarios);
+                }
+                else if (DatagridUsuarios.Columns[e.ColumnIndex].Name == "Borrar")
+                {
+                    usuarioController.Delete(DatagridUsuarios.CurrentRow.Cells[0].Value.ToString());
+                    DatagridUsuarios.Rows.Remove(DatagridUsuarios.CurrentRow);
+                }
+
+            }
         }
 
         private void CofiguariosUsuarios_Load(object sender, EventArgs e)
@@ -54,33 +61,20 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             foreach (Usuarios element in listaUsuarios)
             {
                 index = DatagridUsuarios.RowCount;
-                DatagridUsuarios.Rows.Insert(index, element.id_usuario, element.nombre_usuario, element.tipo_usuario, element.password);
+                DatagridUsuarios.Rows.Insert(index, element.id_usuario, element.nombre_usuario, element.tipo_usuario);
 
             }
 
             labelCrear labelCrear = new labelCrear("Crear nuevo usuario"){ Location = new Point(44, 26) };
+            labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
             this.Controls.Add(labelCrear);
-            if (Editar != null && Crear != null)
-            {
 
-                BotonesEdicion.eliminar += new botonesEdicion.eliminarDelegate(Eliminar);
-                BotonesEdicion.editar += new botonesEdicion.editarDelegate(Editar);
-                labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
 
-            }
-
-            /*/DatagridUsuarios.CurrentRow.Selected = true;*/
         }
 
         private void Eliminar()
         {
-            if (DatagridUsuarios.Rows.Count>0)
-            {
-                UsuarioController UserServide = new UsuarioController();
-                UserServide.Delete(DatagridUsuarios.CurrentRow.Cells[0].Value.ToString());
-                DatagridUsuarios.Rows.Remove(DatagridUsuarios.CurrentRow);
 
-            }
         }
 
         private void BotonesEdicion_Load(object sender, EventArgs e)

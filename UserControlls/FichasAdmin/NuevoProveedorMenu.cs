@@ -26,13 +26,10 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public NuevoProveedorMenu(Proveedor proveedor)
         {
             InitializeComponent();
-            if (proveedor != null)
-            {
-                Proveedor = proveedor;
-                Action += new NuevoProveedorMenu.ActionDelegate(UpdateProveedor);
-                TxtBoxNombre.Texts = proveedor.nombre_proveedor;
-                TxtBoxTelefono.Texts = proveedor.telefono_proveedor;
-            }
+            this.Proveedor = proveedor;
+            Action += new NuevoProveedorMenu.ActionDelegate(UpdateProveedor);
+            TxtBoxNombre.Texts = proveedor.nombre_proveedor;
+            TxtBoxTelefono.Texts = proveedor.telefono_proveedor;
 
         }
 
@@ -46,7 +43,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             }
         }
 
-
+        public Proveedor Proveedor { get; set; }
 
         public delegate void backDelegate();
         public event backDelegate OnBack;
@@ -54,10 +51,6 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public delegate void ActionDelegate();
         public event ActionDelegate Action;
 
-        public delegate void TitleDelegate(string title);
-        public event TitleDelegate TitleChange;
-
-        public Proveedor Proveedor { get; set; }
         ProveedoresControllers ProveedorServise = new ProveedoresControllers();
 
         private void Clear()

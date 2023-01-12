@@ -121,7 +121,7 @@ namespace MarDeCortezDsk.Views
         {
             ActivateButton(sender, RGBColors.color6);
 
-            MenuProveedor proveedor = new MenuProveedor() { Location = new Point(0,0) };
+            MenuProveedor proveedor = new MenuProveedor() { Location = new Point(0, 0) };
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(proveedor);
             BtnBack.Visible = false;

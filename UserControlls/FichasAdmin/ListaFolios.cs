@@ -100,12 +100,29 @@ namespace MarDeCortezDsk.UserControlls
 
         private void DatagridFolios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Animations animations = new Animations();
-            Point DeleteLocation = animations.BtnlocationDatagrid(DatagridFolios,305,Cursor.Position.Y,new Point(496, 133),12);
-            BtnEliminar.Location = DeleteLocation;
-            Point CalcularLocation = animations.BtnlocationDatagrid(DatagridFolios, 305, Cursor.Position.Y, new Point(535, 133), 12);
-            BtnCalcular.Location = CalcularLocation;
             DatagridFolios.CurrentRow.Selected = true;
+
+            while (DatagridFolios.RowCount > 0)
+            {
+                if (DatagridFolios.Columns[e.ColumnIndex].Name == "borrar")
+                {
+                    var dialogBoxOption = RJMessageBox.Show("¿Desea Eliminar este folio?", "Advertencia una vez eliminado no podra recuperarse", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialogBoxOption == DialogResult.OK)
+                    {
+                        FoliosController fichaServise = new FoliosController();
+                        fichaServise.Delete(DatagridFolios.CurrentRow.Cells[0].Value.ToString());
+                        DatagridFolios.Rows.Remove(DatagridFolios.CurrentRow);
+
+                    }
+                }
+                else if (DatagridFolios.Columns[e.ColumnIndex].Name == "calcular")
+                {
+                    string folio = DatagridFolios.CurrentRow.Cells[0].Value.ToString();
+                    Calcular(folio);
+                }
+
+            }
+
         }
 
 
@@ -119,7 +136,6 @@ namespace MarDeCortezDsk.UserControlls
             LblFinalizados.ForeColor = Color.White;
             LblPendientes.ForeColor = Color.FromArgb(150, 150, 150);
             LoadData("Pendiente");
-            BtnCalcular.IconChar = IconChar.Calculator;
 
         }
 
@@ -128,7 +144,6 @@ namespace MarDeCortezDsk.UserControlls
             LblFinalizados.ForeColor = Color.FromArgb(150,150,150);
             LblPendientes.ForeColor = Color.White;
             LoadData("Finalizado");
-            BtnCalcular.IconChar = IconChar.InfoCircle;
 
         }
 

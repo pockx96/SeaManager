@@ -27,15 +27,14 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         }
 
         public Proveedor Proveedor { get; set; }
-        botonesEdicion botonesEdicion = new botonesEdicion() { Location = new Point(496, 116) };
+
 
         public void StartPage()
         {
             TitleBar.Text = "Configuración de usuarios";
             TitleBar.IconChar = FontAwesome.Sharp.IconChar.UserCog;
-            ConfiguracionProveedores cofiguariosProveedores = new ConfiguracionProveedores() { Location = new Point(0,0)};
-            cofiguariosProveedores.Crear += new ConfiguracionProveedores.CrearDelegate(Crear);
-            cofiguariosProveedores.Editar += new ConfiguracionProveedores.DelegateEditar(Actualizar);
+            ConfiguracionProveedores cofiguariosProveedores = new ConfiguracionProveedores(Crear, Actualizar) { Location = new Point(0,0)};
+
             cofiguariosProveedores.GetProveedor += new ConfiguracionProveedores.GetProveedorDelegate(RefreshProveedor);
             UsuariosContainer.Controls.Clear();
             UsuariosContainer.Controls.Add(cofiguariosProveedores);
@@ -52,10 +51,10 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             UsuariosContainer.Controls.Add(nuevoProveedor);
         }
 
-        public void Actualizar()
+        public void Actualizar(Proveedor _proveedor)
         {
             TitleBar.Text = "Modificación de usuarios";
-            NuevoProveedorMenu actualizar = new NuevoProveedorMenu(Proveedor) { Location = new Point(0, 0) };
+            NuevoProveedorMenu actualizar = new NuevoProveedorMenu(_proveedor) { Location = new Point(0, 0) };
             actualizar.OnBack += new NuevoProveedorMenu.backDelegate(StartPage);
             UsuariosContainer.Controls.Clear();
             UsuariosContainer.Controls.Add(actualizar);
@@ -73,10 +72,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             
         }
 
-        public void SideBtnLocation(Point location)
-        {
-            botonesEdicion.Location = location;
-        }
+
 
         private void TitleBar_Click(object sender, EventArgs e)
         {
