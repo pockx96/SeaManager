@@ -25,6 +25,10 @@ namespace MarDeCortezDsk.Views
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 64);
             MenuContainer.Controls.Add(leftBorderBtn);
+            listaFolios = new ListaFolios() { Location = new Point(0,0)};
+            listaFolios.Calcular += new ListaFolios.CalcularDelegate(Calcular);
+            this.Back = new BackDelegate(FichaEntradaAdd);
+            
 
         }
 
@@ -40,7 +44,7 @@ namespace MarDeCortezDsk.Views
         Animations animations = new Animations();
         Point FichasLocation = new Point(100, 87);
         CarritoProducto carrito;
-
+        ListaFolios listaFolios;
 
 
         /// <summary>
@@ -65,25 +69,20 @@ namespace MarDeCortezDsk.Views
         private void FichaEntradaAdd()
         {
             ActivateButton(BtnFichas, RGBColors.color1);
-            ListaFolios listaFolios = new ListaFolios(Usuario);
-            listaFolios.LoadData("Pendiente");
-            listaFolios.Calcular += new ListaFolios.CalcularDelegate(Calcular);
-            BtnBack.Visible = false;
-            listaFolios.Location = new Point(0,0);
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(listaFolios);
             BtnInventario.Location = new Point(11, 73);
+
             BtnInventario.Visible = true;
+            BtnProducto.Enabled = true;
+            BtnUser.Visible = true;
+            BtnBack.Visible = true;
+            BtnFichas.Visible = true;
+
             BtnCamaron.Visible = false;
             BtnPescado.Visible = false;
             BtnOtros.Visible = false;
-            BtnUser.Enabled = true;
-            BtnProducto.Enabled = true;
-            BtnUser.Visible = true;
-            BtnProducto.Visible = true;
-            BtnBack.Visible = true;
-            BtnFichas.Visible = true;
-            this.Back = new BackDelegate(FichaEntradaAdd);
+            
 
         }
         public void CarritoAdd(string proveedor)
@@ -96,7 +95,7 @@ namespace MarDeCortezDsk.Views
                 id_proveedor = proveedor,
                 fecha_entrada = Fecha
             };
-            carrito = new CarritoProducto(Folio,false) { Location = new Point(0, 0) };
+            carrito = new CarritoProducto(Folio, false) { Location = new Point(0, 0) };
             carrito.Restart += new CarritoProducto.RestartDelegate(FichaEntradaAdd);
             BtnInventario.Location = new Point(11, 3);
             BtnInventario.Visible = true;
@@ -132,10 +131,16 @@ namespace MarDeCortezDsk.Views
             Calculadora.Location = new Point(0, 0);
             Calculadora.Clear();
             Calculadora.LoadData(folio);
-            Calculadora.Return += new CalculadoraFichas.ReturnDelegate(FichaEntradaAdd);
+            Calculadora.Return += new CalculadoraFichas.ReturnDelegate(RestartScreen);
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(Calculadora);
             BtnBack.Visible = true;
+        }
+
+        private void RestartScreen()
+        {
+            FichaEntradaAdd();
+            listaFolios.LoadData("Pendiente");
         }
 
         /// <summary>

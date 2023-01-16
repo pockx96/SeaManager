@@ -216,7 +216,7 @@ namespace MarDeCortezDsk.Controllers
         }
 
 
-        public void Delete(string ficha)
+        public void Delete(string id)
         {
             string query = "delete from pescado where IdProducto = @ficha";
 
@@ -227,7 +227,7 @@ namespace MarDeCortezDsk.Controllers
                 try
                 {
                     connection.Open();
-                    command.Parameters.AddWithValue("@ficha", ficha);
+                    command.Parameters.AddWithValue("@ficha", id);
                     command.ExecuteNonQuery();
                     connection.Close();
                 }

@@ -30,7 +30,7 @@ namespace MarDeCortezDsk
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.sPanel1 = new MarDeCortezDsk.UserControlls.SPanel();
+            this.ContainerMain = new MarDeCortezDsk.UserControlls.SPanel();
             this.EyeButton = new FontAwesome.Sharp.IconButton();
             this.txtBox_psswrd = new CustomControls.RJControls.RJTextBox();
             this.txtBox_user = new CustomControls.RJControls.RJTextBox();
@@ -39,31 +39,33 @@ namespace MarDeCortezDsk
             this.BtnAgregar = new MarDeCortezDsk.UserControlls.BotonRedondo();
             this.circularImagen1 = new MarDeCortezDsk.UserControlls.CircularImagen();
             this.label1 = new System.Windows.Forms.Label();
-            this.sPanel1.SuspendLayout();
+            this.ContainerMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circularImagen1)).BeginInit();
             this.SuspendLayout();
             // 
-            // sPanel1
+            // ContainerMain
             // 
-            this.sPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
-            this.sPanel1.BorderColor = System.Drawing.Color.White;
-            this.sPanel1.Controls.Add(this.EyeButton);
-            this.sPanel1.Controls.Add(this.txtBox_psswrd);
-            this.sPanel1.Controls.Add(this.txtBox_user);
-            this.sPanel1.Controls.Add(this.label2);
-            this.sPanel1.Controls.Add(this.label3);
-            this.sPanel1.Controls.Add(this.BtnAgregar);
-            this.sPanel1.Controls.Add(this.circularImagen1);
-            this.sPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sPanel1.Edge = 20;
-            this.sPanel1.Location = new System.Drawing.Point(15, 15);
-            this.sPanel1.Name = "sPanel1";
-            this.sPanel1.Size = new System.Drawing.Size(327, 489);
-            this.sPanel1.TabIndex = 3;
-            this.sPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.sPanel1_Paint);
+            this.ContainerMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.ContainerMain.BorderColor = System.Drawing.Color.White;
+            this.ContainerMain.Controls.Add(this.EyeButton);
+            this.ContainerMain.Controls.Add(this.txtBox_psswrd);
+            this.ContainerMain.Controls.Add(this.txtBox_user);
+            this.ContainerMain.Controls.Add(this.label2);
+            this.ContainerMain.Controls.Add(this.label3);
+            this.ContainerMain.Controls.Add(this.BtnAgregar);
+            this.ContainerMain.Controls.Add(this.circularImagen1);
+            this.ContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContainerMain.Edge = 20;
+            this.ContainerMain.Location = new System.Drawing.Point(15, 15);
+            this.ContainerMain.Margin = new System.Windows.Forms.Padding(6);
+            this.ContainerMain.Name = "ContainerMain";
+            this.ContainerMain.Size = new System.Drawing.Size(327, 508);
+            this.ContainerMain.TabIndex = 3;
+            this.ContainerMain.Paint += new System.Windows.Forms.PaintEventHandler(this.sPanel1_Paint);
             // 
             // EyeButton
             // 
+            this.EyeButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.EyeButton.FlatAppearance.BorderSize = 0;
             this.EyeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EyeButton.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
@@ -151,6 +153,7 @@ namespace MarDeCortezDsk
             this.BtnAgregar.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.BtnAgregar.BorderRadius = 20;
             this.BtnAgregar.BorderSize = 0;
+            this.BtnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAgregar.FlatAppearance.BorderSize = 0;
             this.BtnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,7 +186,7 @@ namespace MarDeCortezDsk
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 509);
+            this.label1.Location = new System.Drawing.Point(16, 529);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 13);
@@ -196,19 +199,19 @@ namespace MarDeCortezDsk
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(357, 524);
-            this.Controls.Add(this.sPanel1);
+            this.ClientSize = new System.Drawing.Size(357, 548);
+            this.Controls.Add(this.ContainerMain);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Login";
-            this.Padding = new System.Windows.Forms.Padding(15, 15, 15, 20);
+            this.Padding = new System.Windows.Forms.Padding(15, 15, 15, 25);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sea Manager";
             this.Load += new System.EventHandler(this.Login_Load);
-            this.sPanel1.ResumeLayout(false);
-            this.sPanel1.PerformLayout();
+            this.ContainerMain.ResumeLayout(false);
+            this.ContainerMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.circularImagen1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -217,7 +220,7 @@ namespace MarDeCortezDsk
 
         #endregion
         private UserControlls.BotonRedondo BtnAgregar;
-        private UserControlls.SPanel sPanel1;
+        private UserControlls.SPanel ContainerMain;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private UserControlls.CircularImagen circularImagen1;

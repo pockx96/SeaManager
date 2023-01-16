@@ -26,6 +26,17 @@ namespace MarDeCortezDsk.Views
             leftBorderBtn.Size = new Size(7, 64);
             MenuContainer.Controls.Add(leftBorderBtn);
             this.Usuario = usuario;
+
+            listaFolios = new ListaFolios(Usuario) { Location = new Point(0,0)};
+            listaFolios.LoadData("Pendiente", Usuario);
+            listaFolios.Calcular += new ListaFolios.CalcularDelegate(Calcular);
+
+            inventarios = new Inventarios(false) { Location = new Point(0, 0) };
+            inventarios.BotonesLaterales += new Inventarios.BotonesLateralesDelegate(CarritoAdd);
+            provedoresShowDialog.loadProveedor += new ProvedorShowDialog.loadProveedorDelegate(CarritoAdd);
+            provedoresShowDialog.Back += new ProvedorShowDialog.BackDelegate(RestartScreen);
+
+            this.Back += new BackDelegate(RestartScreen);
         }
 
         private void MenuAdmin_Load(object sender, EventArgs e)
@@ -52,6 +63,8 @@ namespace MarDeCortezDsk.Views
 
         private delegate void Voidelegate();
 
+        ListaFolios listaFolios;
+        Inventarios inventarios;
         ////////////////////////////////////////// BOTONES LATERALES ///////////////////////////////////////////////////////////////////
 
         /// <summary>
@@ -60,19 +73,14 @@ namespace MarDeCortezDsk.Views
         private void FichaEntradaAdd()
         {
             ActivateButton(BtnFolios, RGBColors.color1);
-            ListaFolios listaFolios = new ListaFolios(Usuario);
-            listaFolios.LoadData("Pendiente",Usuario);
-            listaFolios.Calcular += new ListaFolios.CalcularDelegate(Calcular);
+
             BtnBack.Visible = false;
-            listaFolios.Location = new Point(0,0);
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(listaFolios);
 
         }
         private void BtnFichas_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.color1);
-            FichaEntradaAdd();
             RestartScreen();
 
         }
@@ -103,9 +111,7 @@ namespace MarDeCortezDsk.Views
             ActivateButton(sender, RGBColors.color2);
             Suma_Resta = false;
             BtnClick = "Inventario";
-            Inventarios inventarios = new Inventarios(false);
-            inventarios.BotonesLaterales += new Inventarios.BotonesLateralesDelegate(CarritoAdd); 
-            inventarios.Location = new Point(0,0);
+
             ContainerComponents.Controls.Clear();
             ContainerComponents.Controls.Add(inventarios);
             BtnBack.Visible = false;
@@ -166,17 +172,10 @@ namespace MarDeCortezDsk.Views
         /// 
         private void iconButton3_Click(object sender, EventArgs e)
         {
-
+            ActivateButtonProducto(BtnCamaron, RGBColors.color1);
             Suma_Resta = true;
             BtnClick = "Nuevo Folio";
-
-            provedoresShowDialog.loadProveedor += new ProvedorShowDialog.loadProveedorDelegate(CarritoAdd);
-            provedoresShowDialog.Back += new ProvedorShowDialog.BackDelegate(RestartScreen);
             provedoresShowDialog.ShowDialog();
-            ShowBtnProducto();
-
-            this.Back += new BackDelegate(RestartScreen);
-            ActivateButtonProducto(BtnCamaron, RGBColors.color1);
         }
 
         private void MenuUser_Back()

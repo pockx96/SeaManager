@@ -29,22 +29,26 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         }
         public string Folio { get; set; }
-        double TotalText { get; set; }
+        double TotalCost { get; set; }
 
         public delegate void ReturnDelegate();
         public event ReturnDelegate Return;
 
+        FoliosController foliosController = new FoliosController();
+        CamaronController CamaronController = new CamaronController();
+        PescadoController PescadoController = new PescadoController();
+
         private void CalculadoraFichas_Load(object sender, EventArgs e)
         {
-            if (ListaEntrada.Rows.Count>0)
+            if (DatagridFolios.Rows.Count>0)
             {
-                ListaEntrada.Rows[0].Selected = true;
+                DatagridFolios.Rows[0].Selected = true;
             }
         }
 
         public void Clear()
         {
-            ListaEntrada.Rows.Clear();
+            DatagridFolios.Rows.Clear();
             LblTotal.Text = string.Empty;
         }
 
@@ -52,13 +56,11 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public void LoadData(string fichaEntradas)
         {
             FoliosController FichasServise = new FoliosController();
-            CamaronController CamaronServise = new CamaronController();
-            PescadoController PescadoServise = new PescadoController();
 
 
-            List<Pescado> ListPescados = PescadoServise.GetByFolio(fichaEntradas);
-            List<Camaron> ListCamarones = CamaronServise.GetbyFolio(fichaEntradas);
-            List<Pescado> ListMix = PescadoServise.MixList(ListCamarones, ListPescados);
+            List<Pescado> ListPescados = PescadoController.GetByFolio(fichaEntradas);
+            List<Camaron> ListCamarones = CamaronController.GetbyFolio(fichaEntradas);
+            List<Pescado> ListMix = PescadoController.MixList(ListCamarones, ListPescados);
 
             var ListSort = from p in ListMix
                            orderby p.Tipo_producto
@@ -67,8 +69,8 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
             foreach (Pescado element in ListSort)
             {
-                index = ListaEntrada.RowCount;
-                ListaEntrada.Rows.Insert(index, element.Tipo_producto, element.Presentacion, element.Kilos, element.Cantidad);
+                index = DatagridFolios.RowCount;
+                DatagridFolios.Rows.Insert(index, element.Tipo_producto, element.Presentacion, element.Kilos, element.Cantidad);
             }
 
 
@@ -76,15 +78,62 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
 
 
+        private void EliminarFolio()
+        {
+            DatagridFolios.Rows.Remove(DatagridFolios.CurrentRow);
+            List<Pescado> listPescadoTemp = PescadoController.GetByFolio(Folio);
+            List<Camaron> listCamaronTemp = CamaronController.GetbyFolio(Folio);
+
+            string Producto = DatagridFolios.CurrentRow.Cells[0].Value.ToString();
+            string Presentacion = DatagridFolios.CurrentRow.Cells[1].Value.ToString();
+
+            var pescadoDelete = from p in listPescadoTemp
+                                where p.Tipo_producto == Producto
+                                && p.Presentacion == Presentacion
+                                select p;
+
+            foreach (var element in pescadoDelete)
+            {
+                char tipo = element.IdProducto.First();
+                switch (tipo)
+                {
+                    case 'P':
+                        PescadoController.Delete(element.IdProducto);
+                        break;
+                    case 'C':
+                        CamaronController.Delete(element.IdProducto);
+                        break;
+                }
+            }
+
+        }
 
         private void ListaEntrada_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Animations animations = new Animations();
-            Point LocationEliminar = animations.BtnlocationDatagrid(ListaEntrada, 263, Cursor.Position.Y, new Point(522, 131), 12);
-            BtnEliminar.Location = LocationEliminar;
-            ListaEntrada.CurrentRow.Selected = true;
-            
+            if (DatagridFolios.RowCount>0)
+            {
+                if (DatagridFolios.Columns[e.ColumnIndex].Name == "borrar" && DatagridFolios.CurrentRow.Cells[4].Value!=null)
+                {
+
+                    EliminarFolio();
+                    ActualizarTotalActual();                   
+                }
+            }         
         }
+
+
+        private void ActualizarTotalActual()
+        {
+            TotalCost = 0;
+            foreach (DataGridViewRow row in DatagridFolios.Rows)
+            {
+                double CostoRow = Convert.ToDouble(row.Cells[5].Value);
+                TotalCost += CostoRow;
+            }
+            LblTotal.Text = TotalCost.ToString("C");
+        }
+
+
 
         private void ListaEntrada_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
         {
@@ -92,31 +141,14 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void ListaEntrada_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (ListaEntrada.CurrentRow != null)
+            if (DatagridFolios.RowCount>0)
             {
-
-
-                double costo = Convert.ToUInt32(ListaEntrada.CurrentRow.Cells[4].Value);
-                double cantidad = Convert.ToUInt32(ListaEntrada.CurrentRow.Cells[3].Value);
-
+                double costo = Convert.ToUInt32(DatagridFolios.CurrentRow.Cells[4].Value);
+                double cantidad = Convert.ToUInt32(DatagridFolios.CurrentRow.Cells[3].Value);
                 double subtotal = costo * cantidad;
-
-
-                ListaEntrada.CurrentRow.Cells[5].Value = Convert.ToString(subtotal);
-
-                double total = 0;
-                foreach (DataGridViewRow element in ListaEntrada.Rows)
-                {
-                    total += Convert.ToDouble(element.Cells[5].Value);
-                }
-
-                LblTotal.Text = total.ToString("C");
-
-
-
-
-            }
-
+                DatagridFolios.CurrentRow.Cells[5].Value = Convert.ToString(subtotal);
+                ActualizarTotalActual();
+            }          
         }
 
         private void ListaEntrada_KeyPress(object sender, KeyPressEventArgs e)
@@ -139,7 +171,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
                 string filas = string.Empty;
                 decimal total = 0;
-                foreach (DataGridViewRow row in ListaEntrada.Rows)
+                foreach (DataGridViewRow row in DatagridFolios.Rows)
                 {
                     filas += "<tr>";
                     filas += "<td>" + row.Cells["Column1"].Value.ToString() + "</td>";
@@ -200,11 +232,11 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         {
             {
 
-                for (int i = 0; i < ListaEntrada.RowCount; i++)
+                for (int i = 0; i < DatagridFolios.RowCount; i++)
                 {
-                    for (int j = 0; j < ListaEntrada.ColumnCount; j++)
+                    for (int j = 0; j < DatagridFolios.ColumnCount; j++)
                     {
-                        if (ListaEntrada.Rows[i].Cells[j].Value == null)
+                        if (DatagridFolios.Rows[i].Cells[j].Value == null)
                         {
                             IsEmptyCell = true;
                         }
@@ -245,15 +277,15 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            double costo = Convert.ToDouble(ListaEntrada.CurrentRow.Cells[5].Value);
-            TotalText -= costo;
-            LblTotal.Text = TotalText.ToString("C");
-            ListaEntrada.Rows.Remove(ListaEntrada.CurrentRow);
+            double costo = Convert.ToDouble(DatagridFolios.CurrentRow.Cells[5].Value);
+            TotalCost -= costo;
+            LblTotal.Text = TotalCost.ToString("C");
+            DatagridFolios.Rows.Remove(DatagridFolios.CurrentRow);
         }
         
         private void iconButton1_Click(object sender, EventArgs e)
         {
-            FoliosController foliosController = new FoliosController();
+            
             Folios folioString = foliosController.Get(Folio);
             IsEmptyCell = false;
 
@@ -273,7 +305,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
                 string filas = string.Empty;
                 decimal total = 0;
-                foreach (DataGridViewRow row in ListaEntrada.Rows)
+                foreach (DataGridViewRow row in DatagridFolios.Rows)
                 {
                     filas += "<tr>";
                     filas += "<td>" + row.Cells["Column1"].Value.ToString() + "</td>";
@@ -352,7 +384,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
                 string filas = string.Empty;
                 decimal total = 0;
-                foreach (DataGridViewRow row in ListaEntrada.Rows)
+                foreach (DataGridViewRow row in DatagridFolios.Rows)
                 {
                     filas += "<tr>";
                     filas += "<td>" + row.Cells["Column1"].Value.ToString() + "</td>";
@@ -416,7 +448,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             SLStyle style = new SLStyle();
             style.Font.FontSize = 10;
             style.Font.Bold = true;
-            foreach (DataGridViewColumn column in ListaEntrada.Columns)
+            foreach (DataGridViewColumn column in DatagridFolios.Columns)
             {
                 sl.SetCellValue(1, cl, column.HeaderText.ToString());
                 sl.SetCellStyle(1, cl, style);
@@ -424,7 +456,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
             }
 
-            foreach (DataGridViewRow row in ListaEntrada.Rows)
+            foreach (DataGridViewRow row in DatagridFolios.Rows)
             {
                 sl.SetCellValue(ir, 1, row.Cells[0].Value.ToString());
                 sl.SetCellValue(ir, 2, row.Cells[1].Value.ToString());
@@ -452,6 +484,22 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                 }
             }
         
+        }
+
+        private void sPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TitleBar_MouseEnter(object sender, EventArgs e)
+        {
+            TitleBar.BackColor = Color.FromArgb(76, 76, 76);
+            TitleBar.ForeColor = Color.White;
+        }
+
+        private void TitleBar_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 

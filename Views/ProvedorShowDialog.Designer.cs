@@ -76,15 +76,15 @@
             // iconButton2
             // 
             this.iconButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.iconButton2.Dock = System.Windows.Forms.DockStyle.Right;
             this.iconButton2.FlatAppearance.BorderSize = 0;
             this.iconButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton2.ForeColor = System.Drawing.SystemColors.Control;
-            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.AngleLeft;
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.iconButton2.IconColor = System.Drawing.Color.White;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton2.IconSize = 35;
-            this.iconButton2.Location = new System.Drawing.Point(0, 0);
+            this.iconButton2.IconSize = 30;
+            this.iconButton2.Location = new System.Drawing.Point(312, 0);
             this.iconButton2.Name = "iconButton2";
             this.iconButton2.Size = new System.Drawing.Size(47, 72);
             this.iconButton2.TabIndex = 28;
@@ -103,7 +103,7 @@
             this.TitleBar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.TitleBar.IconSize = 35;
             this.TitleBar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.TitleBar.Location = new System.Drawing.Point(48, 5);
+            this.TitleBar.Location = new System.Drawing.Point(13, 3);
             this.TitleBar.Margin = new System.Windows.Forms.Padding(0);
             this.TitleBar.Name = "TitleBar";
             this.TitleBar.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
@@ -130,6 +130,7 @@
             this.ContainerProveedor.Size = new System.Drawing.Size(337, 471);
             this.ContainerProveedor.TabIndex = 34;
             this.ContainerProveedor.TabStop = false;
+            this.ContainerProveedor.Enter += new System.EventHandler(this.ContainerProveedor_Enter);
             // 
             // label5
             // 

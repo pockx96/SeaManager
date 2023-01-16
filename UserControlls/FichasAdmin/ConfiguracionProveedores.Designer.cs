@@ -95,7 +95,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
             this.DatagridProveedor.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DatagridProveedor.RowTemplate.Height = 40;
-            this.DatagridProveedor.Size = new System.Drawing.Size(639, 262);
+            this.DatagridProveedor.Size = new System.Drawing.Size(739, 304);
             this.DatagridProveedor.TabIndex = 52;
             this.DatagridProveedor.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DatagridUsuarios_CellContentClick);
             // 
@@ -108,7 +108,7 @@
             // 
             this.Column2.HeaderText = "Nombre";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 185;
+            this.Column2.Width = 285;
             // 
             // Column3
             // 

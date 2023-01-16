@@ -22,6 +22,10 @@ namespace MarDeCortezDsk.UserControlls
             InitializeComponent();
             Usuario = usuarios;
         }
+        public ListaFolios()
+        {
+            InitializeComponent();
+        }
 
         private void ListaFolios_Load(object sender, EventArgs e)
         {
@@ -36,19 +40,20 @@ namespace MarDeCortezDsk.UserControlls
         public event CalcularDelegate Calcular;
         string Usuario { get; set; }
 
+        FoliosController FoliosController = new FoliosController();
+            UsuarioController UserController = new UsuarioController();
 
         public void LoadData(string estado,string usuario)
         {
             
             DatagridFolios.Rows.Clear();
-            FoliosController fichaServise = new FoliosController();
-            List<Folios> fichaEntradas = fichaServise.GetByEstado(estado, usuario);
-            UsuarioController userServise = new UsuarioController();
+            
+            List<Folios> fichaEntradas = FoliosController.GetByEstado(estado, usuario);
             int index;
             foreach (Folios element in fichaEntradas)
             {
                 index = DatagridFolios.RowCount;
-                Usuarios user = userServise.Get(element.id_usuario);
+                Usuarios user = UserController.Get(element.id_usuario);
 
                 DatagridFolios.Rows.Insert(index, element.IdFolio, element.id_proveedor, element.fecha_entrada, user.nombre_usuario);
 
@@ -59,14 +64,13 @@ namespace MarDeCortezDsk.UserControlls
         {
 
             DatagridFolios.Rows.Clear();
-            FoliosController fichaServise = new FoliosController();
-            List<Folios> fichaEntradas = fichaServise.GetByEstado(estado);
-            UsuarioController userServise = new UsuarioController();
+            List<Folios> fichaEntradas = FoliosController.GetByEstado(estado);
+           
             int index;
             foreach (Folios element in fichaEntradas)
             {
                 index = DatagridFolios.RowCount;
-                Usuarios user = userServise.Get(element.id_usuario);
+                Usuarios user = UserController.Get(element.id_usuario);
 
                 DatagridFolios.Rows.Insert(index, element.IdFolio, element.id_proveedor, element.fecha_entrada, user.nombre_usuario);
 
@@ -102,7 +106,7 @@ namespace MarDeCortezDsk.UserControlls
         {
             DatagridFolios.CurrentRow.Selected = true;
 
-            while (DatagridFolios.RowCount > 0)
+            if (DatagridFolios.RowCount > 0)
             {
                 if (DatagridFolios.Columns[e.ColumnIndex].Name == "borrar")
                 {
@@ -147,5 +151,10 @@ namespace MarDeCortezDsk.UserControlls
 
         }
 
+        private void TitleBar_MouseEnter(object sender, EventArgs e)
+        {
+            TitleBar.BackColor = Color.FromArgb(76, 76, 76);
+            TitleBar.ForeColor = Color.White;
+        }
     }
 }

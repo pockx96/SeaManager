@@ -43,7 +43,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             TitleBar.IconChar = FontAwesome.Sharp.IconChar.UserCog;
             UsuariosContainer.Controls.Clear();
             UsuariosContainer.Controls.Add(MainUsuariosView);
-
+            MainUsuariosView.LoadData();
 
         }
 

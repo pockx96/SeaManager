@@ -38,8 +38,6 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
         public delegate void EditarDelegate(Proveedor proveedor);
         public event EditarDelegate Editar;
 
-        public delegate void DelegateDetalles();
-        public event DelegateDetalles Detalles;
 
         ProveedoresControllers proveedorController = new ProveedoresControllers();
 

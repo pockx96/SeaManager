@@ -55,6 +55,17 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         private void CofiguariosUsuarios_Load(object sender, EventArgs e)
         {
+
+            LoadData();
+            labelCrear labelCrear = new labelCrear("Crear nuevo usuario"){ Location = new Point(44, 26) };
+            labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
+            this.Controls.Add(labelCrear);
+
+
+        }
+        public void LoadData()
+        {
+            DatagridUsuarios.Rows.Clear();
             UsuarioController userServise = new UsuarioController();
             List<Usuarios> listaUsuarios = userServise.Get();
             int index;
@@ -64,12 +75,6 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                 DatagridUsuarios.Rows.Insert(index, element.id_usuario, element.nombre_usuario, element.tipo_usuario);
 
             }
-
-            labelCrear labelCrear = new labelCrear("Crear nuevo usuario"){ Location = new Point(44, 26) };
-            labelCrear.Crear += new labelCrear.CrearDelegate(Crear);
-            this.Controls.Add(labelCrear);
-
-
         }
 
         private void Eliminar()

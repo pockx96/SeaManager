@@ -56,6 +56,7 @@
             // BtnFolios
             // 
             this.BtnFolios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnFolios.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnFolios.FlatAppearance.BorderSize = 0;
             this.BtnFolios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnFolios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -77,6 +78,7 @@
             // BtnInventario
             // 
             this.BtnInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnInventario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnInventario.FlatAppearance.BorderSize = 0;
             this.BtnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInventario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -135,6 +137,7 @@
             // BtnNuevoFolio
             // 
             this.BtnNuevoFolio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnNuevoFolio.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnNuevoFolio.FlatAppearance.BorderSize = 0;
             this.BtnNuevoFolio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnNuevoFolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -157,6 +160,7 @@
             // 
             this.BtnOtros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
             this.BtnOtros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnOtros.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnOtros.FlatAppearance.BorderSize = 0;
             this.BtnOtros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnOtros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -178,6 +182,7 @@
             // 
             this.BtnPescado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
             this.BtnPescado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnPescado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnPescado.FlatAppearance.BorderSize = 0;
             this.BtnPescado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPescado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -199,6 +204,7 @@
             // 
             this.BtnCamaron.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
             this.BtnCamaron.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BtnCamaron.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCamaron.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BtnCamaron.FlatAppearance.BorderSize = 0;
             this.BtnCamaron.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -220,6 +226,7 @@
             // BtnTienda
             // 
             this.BtnTienda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnTienda.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnTienda.FlatAppearance.BorderSize = 0;
             this.BtnTienda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnTienda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
@@ -241,6 +248,7 @@
             // BtnProveedor
             // 
             this.BtnProveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(122)))), ((int)(((byte)(242)))));
+            this.BtnProveedor.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnProveedor.FlatAppearance.BorderSize = 0;
             this.BtnProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnProveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -283,7 +291,7 @@
             // CalendarioContainer
             // 
             this.CalendarioContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(57)))), ((int)(((byte)(57)))));
-            this.CalendarioContainer.Fecha = "11-01-2023";
+            this.CalendarioContainer.Fecha = "15-01-2023";
             this.CalendarioContainer.Location = new System.Drawing.Point(732, 24);
             this.CalendarioContainer.Name = "CalendarioContainer";
             this.CalendarioContainer.Size = new System.Drawing.Size(131, 31);

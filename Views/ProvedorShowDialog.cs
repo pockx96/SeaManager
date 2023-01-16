@@ -108,5 +108,10 @@ namespace MarDeCortezDsk.Views
         {
 
         }
+
+        private void ContainerProveedor_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace MarDeCortezDsk
         public Login()
         {
             InitializeComponent();
+
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -29,6 +30,10 @@ namespace MarDeCortezDsk
             txtBox_user.LostFocus += new EventHandler(this.TextLostFocus);
             txtBox_psswrd.GotFocus += new EventHandler(this.TextGotFocuspass);
             txtBox_psswrd.LostFocus += new EventHandler(this.TextLostFocuspass);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = Color.Transparent;
+            this.Opacity = 0.85;
+            this.BackColor = Color.FromArgb(82, 122, 242);
 
 
         }
@@ -91,6 +96,7 @@ namespace MarDeCortezDsk
         }
         public void IniciarSesion()
         {
+            splash splash;
             UsuarioController UserServise = new UsuarioController();
             Usuarios UsuarioValidator = UserServise.Get(txtBox_user.Texts);
 
@@ -120,16 +126,16 @@ namespace MarDeCortezDsk
                 if (UsuarioValidator.tipo_usuario == "Usuario\t")
                 {
                     DialogResult result = RJMessageBox.Show("Bienvenido " + UsuarioValidator.nombre_usuario + " !.", "Aviso!");
-                    MenuUser menu = new MenuUser(UsuarioValidator.id_usuario);
-                    menu.Show();
+                    splash = new splash(UsuarioValidator.id_usuario ,false);
                     this.Hide();
+                    splash.Show();
                 }
                 else if (UsuarioValidator.tipo_usuario == "Administrador")
                 {
                     DialogResult result = RJMessageBox.Show("Bienvenido " + UsuarioValidator.nombre_usuario + " !.", "Aviso!");
-                    MenuAdmin menu = new MenuAdmin(UsuarioValidator.id_usuario);
-                    menu.Show();
+                    splash = new splash(UsuarioValidator.id_usuario, true);
                     this.Hide();
+                    splash.Show();
                 }
             }
         }
@@ -167,4 +173,6 @@ namespace MarDeCortezDsk
             }
         }
     }
+
+   
 }
