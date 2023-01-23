@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -69,6 +70,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
 
         public void LoadInventarios(List<Inventario> inventarios)
         {
+            DatagridInventario.SuspendLayout();
             DatagridInventario.Rows.Clear();
             int index;
             var lstSort = inventarios.Where(f => f.Cantidad > 0);
@@ -78,6 +80,7 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
                 DatagridInventario.Rows.Insert(index, element.IdInventario,element.Producto, element.Presentacion, element.Cantidad, element.Kilos);
 
             }
+            DatagridInventario.ResumeLayout();
         }
 
 
@@ -205,6 +208,29 @@ namespace MarDeCortezDsk.UserControlls.FichasAdmin
             {
                 CmboxProveedor.Items.Add(proveedor.nombre_proveedor);
             }
+
+        }
+
+        private void iconButton1_MouseEnter(object sender, EventArgs e)
+        {
+        }
+
+        private void iconButton3_MouseHover(object sender, EventArgs e)
+        {
+        }
+
+        private void btnTienda_MouseHover(object sender, EventArgs e)
+        {
+        }
+
+        private void BtnSalidas_MouseHover(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BtnSalidas_MouseEnter(object sender, EventArgs e)
+        {
+
 
         }
     }

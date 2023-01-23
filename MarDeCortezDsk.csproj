@@ -214,12 +214,6 @@
     <Compile Include="UserControlls\FichasAdmin\ProductosConfig.Designer.cs">
       <DependentUpon>ProductosConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControlls\FichasAdmin\ListaUsuarios.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControlls\FichasAdmin\ListaUsuarios.Designer.cs">
-      <DependentUpon>ListaUsuarios.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControlls\FichasAdmin\NuevoProveedor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -452,9 +446,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlls\FichasAdmin\ProductosConfig.resx">
       <DependentUpon>ProductosConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControlls\FichasAdmin\ListaUsuarios.resx">
-      <DependentUpon>ListaUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlls\FichasAdmin\Inventarios.resx">
       <DependentUpon>Inventarios.cs</DependentUpon>

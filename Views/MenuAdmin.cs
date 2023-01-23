@@ -56,7 +56,6 @@ namespace MarDeCortezDsk.Views
 
 
         Ajustes ajustes = new Ajustes();
-        ListaUsuarios editarUsuario = new ListaUsuarios();
 
         delegate void BackDelegate();
         event BackDelegate Back;
